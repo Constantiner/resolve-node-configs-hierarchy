@@ -1,26 +1,61 @@
 {
-  "name": "resolve-node-configs-hierarchy",
-  "version": "0.1.0",
-  "description": "Simple library to resolve configuration files hierarchy in Node projects for merging them in effective configuration",
-  "main": "index.js",
-  "scripts": {
-    "test": "jest"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Constantiner/resolve-node-configs-hierarchy.git"
-  },
-  "keywords": [
-    "Env",
-    "dotenv",
-    "Node",
-    "Node.js",
-    "configuration"
-  ],
-  "author": "Konstantin Kovalev <constantiner@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Constantiner/resolve-node-configs-hierarchy/issues"
-  },
-  "homepage": "https://github.com/Constantiner/resolve-node-configs-hierarchy#readme"
+	"name": "@constantiner/resolve-node-configs-hierarchy",
+	"version": "0.1.0",
+	"description": "Simple library to resolve configuration files hierarchy in Node projects for merging them in effective configuration",
+	"main": "resolve-node-configs-hierarchy",
+	"scripts": {
+		"test": "npx jest",
+		"lint": "npx eslint '**/*.js'",
+		"build": "npx gulp clean && npx gulp es6modules && npx gulp es5modules && npx gulp es5modulesMin",
+		"format": "npx prettier 'src/*.js' '__tests__/*.js' --write",
+		"prepublishOnly": "npm run clean && npm run lint && npm run test && npm run build",
+		"clean": "npx gulp clean",
+		"clear_jest": "npx jest --clearCache"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Constantiner/resolve-node-configs-hierarchy.git"
+	},
+	"keywords": [
+		"Env",
+		"dotenv",
+		"Node",
+		"Node.js",
+		"configuration"
+	],
+	"author": "Konstantin Kovalev <constantiner@gmail.com>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/Constantiner/resolve-node-configs-hierarchy/issues"
+	},
+	"homepage": "https://github.com/Constantiner/resolve-node-configs-hierarchy#readme",
+	"jest": {
+		"testPathIgnorePatterns": [
+			"/node_modules/"
+		],
+		"coverageDirectory": "./coverage/",
+		"collectCoverage": true,
+		"collectCoverageFrom": [
+			"src/**"
+		]
+	},
+	"prettier": {
+		"printWidth": 120,
+		"useTabs": true,
+		"tabWidth": 4
+	},
+	"engines": {
+		"node": ">=7.6",
+		"npm": ">=5.2.0"
+	},
+	"devDependencies": {
+		"babel-preset-import-export": "^1.0.2",
+		"eslint": "^5.6.1",
+		"eslint-config-prettier": "^3.1.0",
+		"jest": "^23.6.0",
+		"prettier": "^1.14.3"
+	},
+	"dependencies": {
+		"@constantiner/fun-ctional": "^0.6.0"
+	}
 }
