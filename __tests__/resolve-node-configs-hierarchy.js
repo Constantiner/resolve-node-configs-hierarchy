@@ -1,14 +1,23 @@
-import getConfigFiles from "../src/resolve-node-configs-hierarchy";
-import * as getEnvFuncs from "../src/util/getEnv";
-import * as fsUtils from "../src/util/fsUtils";
+let getEnvFuncs;
+let fsUtils;
+let getConfigFiles;
 
 const processCwd = process.cwd();
+
+beforeEach(() => {
+	jest.clearAllMocks().resetModules();
+	getEnvFuncs = require("../src/util/getEnv");
+	fsUtils = require("../src/util/fsUtils");
+	fsUtils.resolvePath = jest.fn(async relativePath => `${processCwd}/${relativePath}`).mockName("resolvePath");
+});
+
+const importGetConfigFiles = () => {
+	getConfigFiles = require("../src/resolve-node-configs-hierarchy").default;
+};
 
 const configureEnvMock = envValue => {
 	getEnvFuncs.getEnv = jest.fn(() => envValue).mockName(`getEnv with ${envValue}`);
 };
-
-fsUtils.resolvePath = jest.fn(async relativePath => `${processCwd}/${relativePath}`).mockName("resolvePath");
 
 const getAbsoluteFromRelative = rel => `${processCwd}/${rel}`;
 
@@ -85,6 +94,7 @@ describe("resolve-node-configs-hierarchy tests", () => {
 		try {
 			configureEnvMock("production");
 			configureExistingPaths([]);
+			importGetConfigFiles();
 			const actualPaths = await getConfigFiles(".env");
 			expect(actualPaths.length).toBe(0);
 		} catch (e) {
@@ -97,6 +107,7 @@ describe("resolve-node-configs-hierarchy tests", () => {
 		try {
 			configureEnvMock("production");
 			configureExistingPaths(existingRelPaths);
+			importGetConfigFiles();
 			const actualPaths = await getConfigFiles(".env");
 			expect(actualPaths.length).toBe(1);
 			comparePathArrays(existingRelPaths, actualPaths);
@@ -110,6 +121,7 @@ describe("resolve-node-configs-hierarchy tests", () => {
 		try {
 			configureEnvMock("test");
 			configureExistingPaths(existingRelPaths);
+			importGetConfigFiles();
 			const actualPaths = await getConfigFiles(".env");
 			expect(actualPaths.length).toBe(1);
 			comparePathArrays(existingRelPaths, actualPaths);
@@ -122,6 +134,7 @@ describe("resolve-node-configs-hierarchy tests", () => {
 		try {
 			configureEnvMock("production");
 			configureExistingPaths(allPossibleExisting);
+			importGetConfigFiles();
 			const actualPaths = await getConfigFiles(".env");
 			expect(actualPaths.length).toBe(4);
 			comparePathArrays([".env.production.local", ".env.local", ".env.production", ".env"], actualPaths);
@@ -134,6 +147,7 @@ describe("resolve-node-configs-hierarchy tests", () => {
 		try {
 			configureEnvMock("test");
 			configureExistingPaths(allPossibleExisting);
+			importGetConfigFiles();
 			const actualPaths = await getConfigFiles(".env");
 			expect(actualPaths.length).toBe(3);
 			comparePathArrays([".env.test.local", ".env.test", ".env"], actualPaths);
@@ -147,6 +161,7 @@ describe("resolve-node-configs-hierarchy tests", () => {
 		try {
 			configureEnvMock("production");
 			configureExistingPaths(existingRelPaths);
+			importGetConfigFiles();
 			const actualPaths = await getConfigFiles(".env.json");
 			expect(actualPaths.length).toBe(1);
 			comparePathArrays(existingRelPaths, actualPaths);
@@ -160,6 +175,7 @@ describe("resolve-node-configs-hierarchy tests", () => {
 		try {
 			configureEnvMock("test");
 			configureExistingPaths(existingRelPaths);
+			importGetConfigFiles();
 			const actualPaths = await getConfigFiles(".env.json");
 			expect(actualPaths.length).toBe(1);
 			comparePathArrays(existingRelPaths, actualPaths);
@@ -172,6 +188,7 @@ describe("resolve-node-configs-hierarchy tests", () => {
 		try {
 			configureEnvMock("production");
 			configureExistingPaths(allPossibleExisting);
+			importGetConfigFiles();
 			const actualPaths = await getConfigFiles(".env.json");
 			expect(actualPaths.length).toBe(4);
 			comparePathArrays(
@@ -187,6 +204,7 @@ describe("resolve-node-configs-hierarchy tests", () => {
 		try {
 			configureEnvMock("test");
 			configureExistingPaths(allPossibleExisting);
+			importGetConfigFiles();
 			const actualPaths = await getConfigFiles(".env.json");
 			expect(actualPaths.length).toBe(3);
 			comparePathArrays([".env.test.local.json", ".env.test.json", ".env.json"], actualPaths);
@@ -201,6 +219,7 @@ describe("resolve-node-configs-hierarchy tests", () => {
 		try {
 			configureEnvMock("production");
 			configureExistingPaths(existingRelPaths);
+			importGetConfigFiles();
 			const actualPaths = await getConfigFiles("src/.env");
 			expect(actualPaths.length).toBe(1);
 			comparePathArrays(existingRelPaths, actualPaths);
@@ -214,6 +233,7 @@ describe("resolve-node-configs-hierarchy tests", () => {
 		try {
 			configureEnvMock("test");
 			configureExistingPaths(existingRelPaths);
+			importGetConfigFiles();
 			const actualPaths = await getConfigFiles("src/.env");
 			expect(actualPaths.length).toBe(1);
 			comparePathArrays(existingRelPaths, actualPaths);
@@ -226,6 +246,7 @@ describe("resolve-node-configs-hierarchy tests", () => {
 		try {
 			configureEnvMock("production");
 			configureExistingPaths(allPossibleExisting);
+			importGetConfigFiles();
 			const actualPaths = await getConfigFiles("src/.env");
 			expect(actualPaths.length).toBe(4);
 			comparePathArrays(
@@ -241,6 +262,7 @@ describe("resolve-node-configs-hierarchy tests", () => {
 		try {
 			configureEnvMock("test");
 			configureExistingPaths(allPossibleExisting);
+			importGetConfigFiles();
 			const actualPaths = await getConfigFiles("src/.env");
 			expect(actualPaths.length).toBe(3);
 			comparePathArrays(["src/.env.test.local", "src/.env.test", "src/.env"], actualPaths);
@@ -254,6 +276,7 @@ describe("resolve-node-configs-hierarchy tests", () => {
 		try {
 			configureEnvMock("production");
 			configureExistingPaths(existingRelPaths);
+			importGetConfigFiles();
 			const actualPaths = await getConfigFiles("src/.env.json");
 			expect(actualPaths.length).toBe(1);
 			comparePathArrays(existingRelPaths, actualPaths);
@@ -267,6 +290,7 @@ describe("resolve-node-configs-hierarchy tests", () => {
 		try {
 			configureEnvMock("test");
 			configureExistingPaths(existingRelPaths);
+			importGetConfigFiles();
 			const actualPaths = await getConfigFiles("src/.env.json");
 			expect(actualPaths.length).toBe(1);
 			comparePathArrays(existingRelPaths, actualPaths);
@@ -279,6 +303,7 @@ describe("resolve-node-configs-hierarchy tests", () => {
 		try {
 			configureEnvMock("production");
 			configureExistingPaths(allPossibleExisting);
+			importGetConfigFiles();
 			const actualPaths = await getConfigFiles("coverage/.env.json");
 			expect(actualPaths.length).toBe(4);
 			comparePathArrays(
@@ -299,6 +324,7 @@ describe("resolve-node-configs-hierarchy tests", () => {
 		try {
 			configureEnvMock("test");
 			configureExistingPaths(allPossibleExisting);
+			importGetConfigFiles();
 			const actualPaths = await getConfigFiles("coverage/.env.json");
 			expect(actualPaths.length).toBe(3);
 			comparePathArrays(

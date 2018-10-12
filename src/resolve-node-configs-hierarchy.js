@@ -4,7 +4,7 @@ import applySafe from "@constantiner/fun-ctional/applySafe";
 import { resolvePath, statAsync } from "./util/fsUtils";
 import { getEnv } from "./util/getEnv";
 
-const fileExists = file => applySafe(acompose(() => true, statAsync), () => false)(file);
+const fileExists = applySafe(acompose(() => true, statAsync), () => false);
 
 const separatePathAndExtension = path => {
 	const pathParts = path.split("/");
@@ -33,9 +33,11 @@ const getHierarchicConfigsArray = nodeEnv => ({ path, ext }) =>
 		.filter(Boolean)
 		.map(path => (ext ? `${path}.${ext}` : path));
 
-const getConfigFiles = configPath =>
-	acompose(afilter(fileExists), getHierarchicConfigsArray(getEnv()), separatePathAndExtension, resolvePath)(
-		configPath
-	);
+const getConfigFiles = acompose(
+	afilter(fileExists),
+	getHierarchicConfigsArray(getEnv()),
+	separatePathAndExtension,
+	resolvePath
+);
 
 export default getConfigFiles;
