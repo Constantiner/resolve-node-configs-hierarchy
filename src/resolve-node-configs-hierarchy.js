@@ -1,21 +1,12 @@
 import afilter from "@constantiner/fun-ctional/afilter";
+import acompose from "@constantiner/fun-ctional/acompose";
+import applySafe from "@constantiner/fun-ctional/applySafe";
 import { getEnv } from "./util/getEnv";
-import { getProcessCwd, realpathAsync, resolvePath, statAsync } from "./util/getFsUtils";
+import { resolvePath, statAsync } from "./util/fsUtils";
 
-const existsAsync = async file => {
-	try {
-		await statAsync(file);
-		return true;
-	} catch (e) {
-		return false;
-	}
-};
+const fileExists = file => applySafe(acompose(() => true, statAsync), () => false)(file);
 
-// Make sure any symlinks in the project folder are resolved:
-// https://github.com/facebook/create-react-app/issues/637
-const resolveApp = async relativePath => resolvePath(await realpathAsync(getProcessCwd()), relativePath);
-
-const getPathAndExtension = path => {
+const separatePathAndExtension = path => {
 	const pathParts = path.split("/");
 	let fileName = pathParts.pop();
 	let extension = "";
@@ -29,9 +20,8 @@ const getPathAndExtension = path => {
 };
 
 // https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use
-const getConfigFilesListHierarchy = (configPath, nodeEnv) => {
-	const { path, ext } = getPathAndExtension(configPath);
-	return [
+const getHierarchicConfigsArray = nodeEnv => ({ path, ext }) =>
+	[
 		`${path}.${nodeEnv}.local`,
 		// Don't include `.env.local` for `test` environment
 		// since normally you expect tests to produce the same
@@ -42,13 +32,10 @@ const getConfigFilesListHierarchy = (configPath, nodeEnv) => {
 	]
 		.filter(Boolean)
 		.map(path => (ext ? `${path}.${ext}` : path));
-};
 
-const getConfigFiles = async configPath => {
-	const realConfigPath = await resolveApp(configPath);
-	const configFiles = getConfigFilesListHierarchy(realConfigPath, getEnv());
-	const existingFiles = await afilter(existsAsync)(configFiles);
-	return existingFiles;
-};
+const getConfigFiles = configPath =>
+	acompose(afilter(fileExists), getHierarchicConfigsArray(getEnv()), separatePathAndExtension, resolvePath)(
+		configPath
+	);
 
 export default getConfigFiles;
