@@ -1,6 +1,6 @@
 import getConfigFiles from "../src/resolve-node-configs-hierarchy";
 import * as getEnvFuncs from "../src/util/getEnv";
-import * as getFsUtils from "../src/util/getFsUtils";
+import * as fsUtils from "../src/util/fsUtils";
 
 const processCwd = process.cwd();
 
@@ -8,22 +8,20 @@ const configureEnvMock = envValue => {
 	getEnvFuncs.getEnv = jest.fn(() => envValue).mockName(`getEnv with ${envValue}`);
 };
 
-getFsUtils.realpathAsync = jest.fn(async () => processCwd);
-
-getFsUtils.getProcessCwd = jest.fn(async () => processCwd);
-
-getFsUtils.resolvePath = jest.fn((basePath, relativePath) => `${basePath}/${relativePath}`);
+fsUtils.resolvePath = jest.fn(async relativePath => `${processCwd}/${relativePath}`).mockName("resolvePath");
 
 const getAbsoluteFromRelative = rel => `${processCwd}/${rel}`;
 
 const configureExistingPaths = relPaths => {
 	const filesDictionary = relPaths.map(getAbsoluteFromRelative).reduce((dic, path) => ((dic[path] = true), dic), {});
-	getFsUtils.statAsync = jest.fn(async file => {
-		if (filesDictionary[file]) {
-			return {};
-		}
-		throw { code: "ENOENT" };
-	});
+	fsUtils.statAsync = jest
+		.fn(async file => {
+			if (filesDictionary[file]) {
+				return {};
+			}
+			throw { code: "ENOENT" };
+		})
+		.mockName("statAsync");
 };
 
 const comparePathArrays = (expectedRelPaths, actualAbsolutePaths) => {
