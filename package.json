@@ -68,6 +68,6 @@
 		"regenerator-runtime": "^0.12.1"
 	},
 	"dependencies": {
-		"@constantiner/fun-ctional": "^0.6.0"
+		"@constantiner/fun-ctional": "^0.6.1"
 	}
 }
