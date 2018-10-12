@@ -1,6 +1,6 @@
 {
 	"name": "@constantiner/resolve-node-configs-hierarchy",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Simple library to resolve configuration files hierarchy in Node projects for merging them into effective configuration",
 	"main": "resolve-node-configs-hierarchy",
 	"scripts": {
