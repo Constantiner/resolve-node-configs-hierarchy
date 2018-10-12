@@ -1,5 +1,7 @@
 {
-	"presets": [
-		"import-export"
-	]
+	"env": {
+		"test": {
+			"presets": ["env"]
+		}
+	}
 }
