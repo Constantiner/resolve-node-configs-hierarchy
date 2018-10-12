@@ -60,6 +60,10 @@ typings/
 # next.js build output
 .next
 
+# VS Code
+.vscode
+
+
 #distributive files
 /*.js
 /*.mjs
