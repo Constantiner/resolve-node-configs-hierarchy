@@ -20,8 +20,9 @@ const separatePathAndExtension = path => {
 };
 
 // https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use
-const getHierarchicConfigsArray = nodeEnv => ({ path, ext }) =>
-	[
+const getHierarchicConfigsArray = nodeEnvFunc => ({ path, ext }) => {
+	const nodeEnv = nodeEnvFunc();
+	return [
 		`${path}.${nodeEnv}.local`,
 		// Don't include `.env.local` for `test` environment
 		// since normally you expect tests to produce the same
@@ -32,6 +33,7 @@ const getHierarchicConfigsArray = nodeEnv => ({ path, ext }) =>
 	]
 		.filter(Boolean)
 		.map(path => (ext ? `${path}.${ext}` : path));
+};
 
 /**
  * Returns a list of absolute file paths of existing files in the order to apply from first to last
@@ -71,7 +73,7 @@ const getHierarchicConfigsArray = nodeEnv => ({ path, ext }) =>
  */
 const getConfigFiles = acompose(
 	afilter(fileExists),
-	getHierarchicConfigsArray(getEnv()),
+	getHierarchicConfigsArray(getEnv),
 	separatePathAndExtension,
 	resolvePath
 );
