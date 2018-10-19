@@ -18,12 +18,12 @@ It will list the following files, starting from the bottom. The first value set 
 
 * `.env` - The Original®
 * `.env.development`, `.env.test`, `.env.production` - Environment-specific settings.
-* `.env.local` - Local overrides. This file is loaded for all environments except test.
-* `.env.development.local`, `.env.test.local`, `.env.production.local` - Local overrides of environment-specific settings.
+* `.env.local` - Local overrides. This file is loaded for all environments except test (you can include it with flag as the second parameter).
+* `.env.development.local`, `.env.test.local` (for `test` environment you can include it with flag as the second parameter), `.env.production.local` - Local overrides of environment-specific settings.
 
 It uses `process.env.NODE_ENV` for setting environment.
 
-For test environment it will not list `.env.local` from this list since normally you expect tests to produce the same results for everyone.
+For test environment it will not list `.env.local` and `.env.test.local` from this list by default since normally you expect tests to produce the same results for everyone. You can include them by passing the second parameter with `true` value.
 
 It may use any relative path as the base path even with extension.
 
@@ -58,6 +58,18 @@ Then you can use it:
 
 ```JavaScript
 getConfigFiles("src/.env").then(files => {
+	files.forEach(file => {
+		dotenv.config({
+			path: file
+		})
+	})
+});
+```
+
+To include `local` files in `test` environment you may pass corresponding flag (it is `false` by default):
+
+```JavaScript
+getConfigFiles("src/.env", true).then(files => {
 	files.forEach(file => {
 		dotenv.config({
 			path: file

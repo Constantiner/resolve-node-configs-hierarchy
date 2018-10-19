@@ -20,14 +20,17 @@ const separatePathAndExtension = path => {
 };
 
 // https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use
-const getHierarchicConfigsArray = nodeEnvFunc => ({ path, ext }) => {
+const getHierarchicConfigsArray = (nodeEnvFunc, includeTestLocals) => ({ path, ext }) => {
 	const nodeEnv = nodeEnvFunc();
 	return [
-		`${path}.${nodeEnv}.local`,
-		// Don't include `.env.local` for `test` environment
+		// Don't include `*.local.*` files for `test` environment
 		// since normally you expect tests to produce the same
 		// results for everyone
-		nodeEnv !== "test" && `${path}.local`,
+		(nodeEnv !== "test" || includeTestLocals) && `${path}.${nodeEnv}.local`,
+		// Don't include `*.local.*` files for `test` environment
+		// since normally you expect tests to produce the same
+		// results for everyone
+		(nodeEnv !== "test" || includeTestLocals) && `${path}.local`,
 		`${path}.${nodeEnv}`,
 		path
 	]
@@ -45,13 +48,15 @@ const getHierarchicConfigsArray = nodeEnvFunc => ({ path, ext }) => {
  * The first value set (or those already defined in the environment) take precedence:
  * .env - The Original®
  * .env.development, .env.test, .env.production - Environment-specific settings.
- * .env.local - Local overrides. This file is loaded for all environments except test.
- * .env.development.local, .env.test.local, .env.production.local - Local overrides of environment-specific settings.
+ * .env.local - Local overrides. This file is loaded for all environments except test (you can include it with flag).
+ * .env.development.local, .env.test.local (use flag to include it for test environment), 
+ * .env.production.local - Local overrides of environment-specific settings.
  *
  * It uses process.env.NODE_ENV for setting environment.
  *
- * For test environment it will not list .env.local from this list
+ * For test environment it will not list .env.local and .env.test.local from this list by default
  * since normally you expect tests to produce the same results for everyone.
+ * You can include them by passing the second parameter with true value.
  *
  * It may use any relative path as the base path even with extension.
  *
@@ -67,15 +72,16 @@ const getHierarchicConfigsArray = nodeEnvFunc => ({ path, ext }) => {
  * This utility was inspired by https://github.com/facebook/create-react-app and may contain some chunks of code from it.
  *
  * @param {string} file Relative path (from project root) to base file location (for example "config/.env").
+ * @param {boolean} includeTestLocals Default to false. If true it includes files with "local" in name for test environment.
  * @returns {Promise<Array>} A promise resolving to array of absolute file names.
  *
  * @see https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use
  */
-const getConfigFiles = acompose(
+const getConfigFiles = (file, includeTestLocals = false) => acompose(
 	afilter(fileExists),
-	getHierarchicConfigsArray(getEnv),
+	getHierarchicConfigsArray(getEnv, includeTestLocals),
 	separatePathAndExtension,
 	resolvePath
-);
+)(file);
 
 export default getConfigFiles;
