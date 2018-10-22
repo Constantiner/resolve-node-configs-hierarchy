@@ -16,7 +16,7 @@ const banner = `/**
 
 `;
 
-gulp.task("clean", () => del(["dist", "*.js", "*.mjs", "*.map", "!gulpfile.js"]));
+gulp.task("clean", () => del(["dist", "*.js", "*.mjs", "*.map", "!gulpfile.js", "!babel.config.js"]));
 
 const getSourceFile = () => gulp.src(SOURCES),
 	getDest = () => gulp.dest("."),
