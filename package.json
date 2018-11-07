@@ -39,20 +39,20 @@
 		"npm": ">=5.2.0"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.1.2",
-		"@babel/preset-env": "^7.1.0",
+		"@babel/core": "^7.1.5",
+		"@babel/preset-env": "^7.1.5",
 		"babel-core": "^7.0.0-bridge.0",
 		"babel-jest": "^23.6.0",
 		"del": "^3.0.0",
-		"eslint": "^5.7.0",
+		"eslint": "^5.8.0",
 		"eslint-config-prettier": "^3.1.0",
 		"gulp": "^4.0.0",
-		"gulp-better-rollup": "^3.3.0",
+		"gulp-better-rollup": "^3.4.0",
 		"gulp-rename": "^1.4.0",
 		"jest": "^23.6.0",
 		"jest-pnp-resolver": "^1.0.1",
 		"mock-fs": "^4.7.0",
-		"prettier": "^1.14.3",
+		"prettier": "^1.15.1",
 		"regenerator-runtime": "^0.12.1"
 	},
 	"dependencies": {
