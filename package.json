@@ -10,7 +10,8 @@
 		"format": "npx prettier 'src/*.js' '__tests__/*.js' --write",
 		"prepublishOnly": "npm run clean && npm run lint && npm run test && npm run build",
 		"clean": "npx gulp clean",
-		"clear_jest": "npx jest --clearCache"
+		"clear_jest": "npx jest --clearCache",
+		"lint-staged": "lint-staged"
 	},
 	"repository": {
 		"type": "git",
@@ -23,7 +24,10 @@
 		"Node.js",
 		"configuration"
 	],
-	"author": "Konstantin Kovalev <constantiner@gmail.com>",
+	"author": {
+		"name": "Konstantin Kovalev",
+		"email": "constantiner@gmail.com"
+	},
 	"license": "MIT",
 	"bugs": {
 		"url": "https://github.com/Constantiner/resolve-node-configs-hierarchy/issues"
@@ -50,8 +54,10 @@
 		"gulp": "^4.0.0",
 		"gulp-better-rollup": "^3.4.0",
 		"gulp-rename": "^1.4.0",
+		"husky": "^1.3.0",
 		"jest": "^23.6.0",
 		"jest-pnp-resolver": "^1.0.2",
+		"lint-staged": "^8.1.0",
 		"mock-fs": "^4.7.0",
 		"prettier": "^1.15.3",
 		"regenerator-runtime": "^0.12.1"
