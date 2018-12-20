@@ -49,7 +49,7 @@ const getHierarchicConfigsArray = (nodeEnvFunc, includeTestLocals) => ({ path, e
  * .env - The Original®
  * .env.development, .env.test, .env.production - Environment-specific settings.
  * .env.local - Local overrides. This file is loaded for all environments except test (you can include it with flag).
- * .env.development.local, .env.test.local (use flag to include it for test environment), 
+ * .env.development.local, .env.test.local (use flag to include it for test environment),
  * .env.production.local - Local overrides of environment-specific settings.
  *
  * It uses process.env.NODE_ENV for setting environment.
@@ -77,11 +77,17 @@ const getHierarchicConfigsArray = (nodeEnvFunc, includeTestLocals) => ({ path, e
  *
  * @see https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use
  */
-const getConfigFiles = (file, includeTestLocals = false) => acompose(
-	afilter(fileExists),
-	getHierarchicConfigsArray(getEnv, includeTestLocals),
-	separatePathAndExtension,
-	resolvePath
-)(file);
+const getConfigFiles = (file, includeTestLocals = false) =>
+	acompose(
+		afilter(fileExists),
+		getHierarchicConfigsArray(getEnv, includeTestLocals),
+		separatePathAndExtension,
+		resolvePath
+	)(file);
 
-export default getConfigFiles;
+const getConfigFile = async (file, includeTestLocals = false) => {
+	const files = await getConfigFiles(file, includeTestLocals);
+	return files.length > 0 ? files[0] : null;
+};
+
+export { getConfigFiles, getConfigFile };

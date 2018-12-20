@@ -1,6 +1,7 @@
 let getEnvFuncs;
 let fsUtils;
 let getConfigFiles;
+let getConfigFile;
 
 const processCwd = process.cwd();
 
@@ -12,7 +13,9 @@ beforeEach(() => {
 });
 
 const importGetConfigFiles = () => {
-	getConfigFiles = require("../src/resolve-node-configs-hierarchy").default;
+	const resolveNodeConfigsHierarchy = require("../src/resolve-node-configs-hierarchy");
+	getConfigFiles = resolveNodeConfigsHierarchy.getConfigFiles;
+	getConfigFile = resolveNodeConfigsHierarchy.getConfigFile;
 };
 
 const configureEnvMock = envValue => {
@@ -88,14 +91,14 @@ const allPossibleExisting = [
 	"coverage/.env.development.json"
 ];
 
-describe("resolve-node-configs-hierarchy tests", () => {
+describe("resolve-node-configs-hierarchy getConfigFiles tests", () => {
 	it("should pass without existing files", async () => {
 		expect.assertions(1);
 		configureEnvMock("production");
 		configureExistingPaths([]);
 		importGetConfigFiles();
-		const actualPaths = await getConfigFiles(".env");
-		expect(actualPaths.length).toBe(0);
+		const actualPath = await getConfigFile(".env");
+		expect(actualPath).toBeNull();
 	});
 	it("should pass without extension in project root in production", async () => {
 		expect.assertions(2);
@@ -307,5 +310,205 @@ describe("resolve-node-configs-hierarchy tests", () => {
 			],
 			actualPaths
 		);
+	});
+});
+describe("resolve-node-configs-hierarchy getConfigFile tests", () => {
+	it("should pass without existing files", async () => {
+		expect.assertions(1);
+		configureEnvMock("production");
+		configureExistingPaths([]);
+		importGetConfigFiles();
+		const actualPath = await getConfigFile(".env");
+		expect(actualPath).toBeNull();
+	});
+	it("should pass without extension in project root in production", async () => {
+		expect.assertions(1);
+		const expectedPath = ".env";
+		const existingRelPaths = [expectedPath];
+		configureEnvMock("production");
+		configureExistingPaths(existingRelPaths);
+		importGetConfigFiles();
+		const actualPath = await getConfigFile(".env");
+		expect(actualPath).toBe(getAbsoluteFromRelative(expectedPath));
+	});
+	it("should pass without extension in project root in test", async () => {
+		expect.assertions(1);
+		const expectedPath = ".env";
+		const existingRelPaths = [expectedPath];
+		configureEnvMock("test");
+		configureExistingPaths(existingRelPaths);
+		importGetConfigFiles();
+		const actualPath = await getConfigFile(".env");
+		expect(actualPath).toBe(getAbsoluteFromRelative(expectedPath));
+	});
+	it("should pass for all existing without ext in project root in production", async () => {
+		expect.assertions(1);
+		const expectedPath = ".env.production.local";
+		configureEnvMock("production");
+		configureExistingPaths(allPossibleExisting);
+		importGetConfigFiles();
+		const actualPath = await getConfigFile(".env");
+		expect(actualPath).toBe(getAbsoluteFromRelative(expectedPath));
+	});
+	it("should pass for all existing without ext in project root in test", async () => {
+		expect.assertions(1);
+		const expectedPath = ".env.test";
+		configureEnvMock("test");
+		configureExistingPaths(allPossibleExisting);
+		importGetConfigFiles();
+		const actualPath = await getConfigFile(".env");
+		expect(actualPath).toBe(getAbsoluteFromRelative(expectedPath));
+	});
+	it("should pass for all existing without ext in project root in test with flag", async () => {
+		expect.assertions(1);
+		const expectedPath = ".env.test.local";
+		configureEnvMock("test");
+		configureExistingPaths(allPossibleExisting);
+		importGetConfigFiles();
+		const actualPath = await getConfigFile(".env", true);
+		expect(actualPath).toBe(getAbsoluteFromRelative(expectedPath));
+	});
+	it("should pass with extension in project root in production", async () => {
+		expect.assertions(1);
+		const expectedPath = ".env.json";
+		const existingRelPaths = [expectedPath];
+		configureEnvMock("production");
+		configureExistingPaths(existingRelPaths);
+		importGetConfigFiles();
+		const actualPath = await getConfigFile(".env.json");
+		expect(actualPath).toBe(getAbsoluteFromRelative(expectedPath));
+	});
+	it("should pass with extension in project root in test", async () => {
+		expect.assertions(1);
+		const expectedPath = ".env.json";
+		const existingRelPaths = [expectedPath];
+		configureEnvMock("test");
+		configureExistingPaths(existingRelPaths);
+		importGetConfigFiles();
+		const actualPath = await getConfigFile(".env.json");
+		expect(actualPath).toBe(getAbsoluteFromRelative(expectedPath));
+	});
+	it("should pass for all existing with ext in project root in production", async () => {
+		expect.assertions(1);
+		const expectedPath = ".env.production.local.json";
+		configureEnvMock("production");
+		configureExistingPaths(allPossibleExisting);
+		importGetConfigFiles();
+		const actualPath = await getConfigFile(".env.json");
+		expect(actualPath).toBe(getAbsoluteFromRelative(expectedPath));
+	});
+	it("should pass for all existing with ext in project root in test", async () => {
+		expect.assertions(1);
+		const expectedPath = ".env.test.json";
+		configureEnvMock("test");
+		configureExistingPaths(allPossibleExisting);
+		importGetConfigFiles();
+		const actualPath = await getConfigFile(".env.json");
+		expect(actualPath).toBe(getAbsoluteFromRelative(expectedPath));
+	});
+
+	it("should pass for all existing with ext in project root in test with flag", async () => {
+		expect.assertions(1);
+		const expectedPath = ".env.test.local.json";
+		configureEnvMock("test");
+		configureExistingPaths(allPossibleExisting);
+		importGetConfigFiles();
+		const actualPath = await getConfigFile(".env.json", true);
+		expect(actualPath).toBe(getAbsoluteFromRelative(expectedPath));
+	});
+	it("should pass without extension in subdirectory in production", async () => {
+		expect.assertions(1);
+		const expectedPath = "src/.env";
+		const existingRelPaths = [expectedPath];
+		configureEnvMock("production");
+		configureExistingPaths(existingRelPaths);
+		importGetConfigFiles();
+		const actualPath = await getConfigFile("src/.env");
+		expect(actualPath).toBe(getAbsoluteFromRelative(expectedPath));
+	});
+	it("should pass without extension in subdirectory in test", async () => {
+		expect.assertions(1);
+		const expectedPath = "src/.env";
+		const existingRelPaths = [expectedPath];
+		configureEnvMock("test");
+		configureExistingPaths(existingRelPaths);
+		importGetConfigFiles();
+		const actualPath = await getConfigFile("src/.env");
+		expect(actualPath).toBe(getAbsoluteFromRelative(expectedPath));
+	});
+	it("should pass for all existing without ext in subdirectory in production", async () => {
+		expect.assertions(1);
+		const expectedPath = "src/.env.production.local";
+		configureEnvMock("production");
+		configureExistingPaths(allPossibleExisting);
+		importGetConfigFiles();
+		const actualPath = await getConfigFile("src/.env");
+
+		expect(actualPath).toBe(getAbsoluteFromRelative(expectedPath));
+	});
+	it("should pass for all existing without ext in subdirectory in test", async () => {
+		expect.assertions(1);
+		const expectedPath = "src/.env.test";
+		configureEnvMock("test");
+		configureExistingPaths(allPossibleExisting);
+		importGetConfigFiles();
+		const actualPath = await getConfigFile("src/.env");
+		expect(actualPath).toBe(getAbsoluteFromRelative(expectedPath));
+	});
+	it("should pass for all existing without ext in subdirectory in test with flag", async () => {
+		expect.assertions(1);
+		const expectedPath = "src/.env.test.local";
+		configureEnvMock("test");
+		configureExistingPaths(allPossibleExisting);
+		importGetConfigFiles();
+		const actualPath = await getConfigFile("src/.env", true);
+		expect(actualPath).toBe(getAbsoluteFromRelative(expectedPath));
+	});
+	it("should pass with extension in subdirectory in production", async () => {
+		expect.assertions(1);
+		const expectedPath = "src/.env.json";
+		const existingRelPaths = [expectedPath];
+		configureEnvMock("production");
+		configureExistingPaths(existingRelPaths);
+		importGetConfigFiles();
+		const actualPath = await getConfigFile("src/.env.json");
+		expect(actualPath).toBe(getAbsoluteFromRelative(expectedPath));
+	});
+	it("should pass with extension in subdirectory in test", async () => {
+		expect.assertions(1);
+		const expectedPath = "src/.env.json";
+		const existingRelPaths = [expectedPath];
+		configureEnvMock("test");
+		configureExistingPaths(existingRelPaths);
+		importGetConfigFiles();
+		const actualPath = await getConfigFile("src/.env.json");
+		expect(actualPath).toBe(getAbsoluteFromRelative(expectedPath));
+	});
+	it("should pass for all existing with ext in subdirectory in production", async () => {
+		expect.assertions(1);
+		const expectedPath = "coverage/.env.production.local.json";
+		configureEnvMock("production");
+		configureExistingPaths(allPossibleExisting);
+		importGetConfigFiles();
+		const actualPath = await getConfigFile("coverage/.env.json");
+		expect(actualPath).toBe(getAbsoluteFromRelative(expectedPath));
+	});
+	it("should pass for all existing with ext in subdirectory in test", async () => {
+		expect.assertions(1);
+		const expectedPath = "coverage/.env.test.json";
+		configureEnvMock("test");
+		configureExistingPaths(allPossibleExisting);
+		importGetConfigFiles();
+		const actualPath = await getConfigFile("coverage/.env.json");
+		expect(actualPath).toBe(getAbsoluteFromRelative(expectedPath));
+	});
+	it("should pass for all existing with ext in subdirectory in test with flag", async () => {
+		expect.assertions(1);
+		const expectedPath = "coverage/.env.test.local.json";
+		configureEnvMock("test");
+		configureExistingPaths(allPossibleExisting);
+		importGetConfigFiles();
+		const actualPath = await getConfigFile("coverage/.env.json", true);
+		expect(actualPath).toBe(getAbsoluteFromRelative(expectedPath));
 	});
 });
