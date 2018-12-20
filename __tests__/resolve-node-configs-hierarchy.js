@@ -26,14 +26,14 @@ const getAbsoluteFromRelative = rel => `${processCwd}/${rel}`;
 
 const configureExistingPaths = relPaths => {
 	const filesDictionary = relPaths.map(getAbsoluteFromRelative).reduce((dic, path) => ((dic[path] = true), dic), {});
-	fsUtils.statAsync = jest
+	fsUtils.fileExists = jest
 		.fn(async file => {
 			if (filesDictionary[file]) {
-				return {};
+				return true;
 			}
-			throw { code: "ENOENT" };
+			return false;
 		})
-		.mockName("statAsync");
+		.mockName("fileExists");
 };
 
 const comparePathArrays = (expectedRelPaths, actualAbsolutePaths) => {

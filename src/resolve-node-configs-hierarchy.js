@@ -1,10 +1,7 @@
-import acatch from "@constantiner/fun-ctional/acatch";
 import acompose from "@constantiner/fun-ctional/acompose";
 import afilter from "@constantiner/fun-ctional/afilter";
-import { resolvePath, statAsync } from "./util/fsUtils";
+import { fileExists, resolvePath } from "./util/fsUtils";
 import { getEnv } from "./util/getEnv";
-
-const fileExists = acompose(acatch(() => false), () => true, statAsync);
 
 const separatePathAndExtension = path => {
 	const pathParts = path.split("/");
