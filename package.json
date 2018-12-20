@@ -1,7 +1,7 @@
 {
 	"name": "@constantiner/resolve-node-configs-hierarchy",
 	"version": "0.3.0",
-	"description": "Simple library to resolve configuration files hierarchy in Node projects for merging them into effective configuration",
+	"description": "Simple library to resolve configuration files hierarchy in Node projects for producing effective configuration from them",
 	"main": "resolve-node-configs-hierarchy",
 	"scripts": {
 		"test": "npx jest --config jest.config.json",
