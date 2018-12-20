@@ -6,7 +6,7 @@ It is very convenient if you need to have local configuration for local environm
 
 So the library allows to manage configurations for any environment and the same code base.
 
-**Note** Don't forget to place `local` files to `.gitignore`.
+**Note** Don't forget to put `local` files to `.gitignore`.
 
 - [Documentation](#documentation)
 	- [getConfigFiles](#getconfigfiles)
