@@ -5,6 +5,8 @@ const del = require("del");
 const rollup = require("gulp-better-rollup");
 const SOURCES = "src/*.js";
 const fs = require("fs");
+const { format } = require("date-fns");
+const getBuildDate = () => format(new Date(), "DD MMMM YYYY");
 let banner = `/**
  * ${pkg.name}
  * ${pkg.description}
@@ -12,6 +14,7 @@ let banner = `/**
  * @author ${pkg.author.name} <${pkg.author.email}>
  * @version v${pkg.version}
  * @link ${pkg.homepage}
+ * @date ${getBuildDate()}
  * @license ${pkg.license}
  */
 
@@ -30,6 +33,7 @@ const getSourceFile = () => gulp.src(SOURCES),
  * @author ${pkg.author.name} <${pkg.author.email}>
  * @version v${pkg.version}
  * @link ${pkg.homepage}
+ * @date ${getBuildDate()}
  * 
 ${licenseText.replace(/^/gm, " * ")}
  */
