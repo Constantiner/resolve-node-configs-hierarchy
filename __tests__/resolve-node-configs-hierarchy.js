@@ -1,15 +1,21 @@
+import {
+	allPossibleExistingFiles as allPossibleExisting,
+	getAbsoluteFromRelative as getAbsoluteFromRelativeFactory,
+	comparePathArrays as comparePathArraysFactory
+} from "./util/test-utils";
+
 let getEnvFuncs;
 let fsUtils;
 let getConfigFiles;
 let getConfigFile;
 
-const processCwd = process.cwd();
+const getAbsoluteFromRelative = getAbsoluteFromRelativeFactory();
 
 beforeEach(() => {
 	jest.clearAllMocks().resetModules();
 	getEnvFuncs = require("../src/util/getEnv");
 	fsUtils = require("../src/util/fsUtils");
-	fsUtils.resolvePath = jest.fn(async relativePath => `${processCwd}/${relativePath}`).mockName("resolvePath");
+	fsUtils.resolvePath = jest.fn(async relativePath => getAbsoluteFromRelative(relativePath)).mockName("resolvePath");
 });
 
 const importGetConfigFiles = () => {
@@ -21,8 +27,6 @@ const importGetConfigFiles = () => {
 const configureEnvMock = envValue => {
 	getEnvFuncs.getEnv = jest.fn(() => envValue).mockName(`getEnv with ${envValue}`);
 };
-
-const getAbsoluteFromRelative = rel => `${processCwd}/${rel}`;
 
 const configureExistingPaths = relPaths => {
 	const filesDictionary = relPaths.map(getAbsoluteFromRelative).reduce((dic, path) => ((dic[path] = true), dic), {});
@@ -36,60 +40,7 @@ const configureExistingPaths = relPaths => {
 		.mockName("fileExists");
 };
 
-const comparePathArrays = (expectedRelPaths, actualAbsolutePaths) => {
-	expect(expectedRelPaths.map(getAbsoluteFromRelative)).toEqual(actualAbsolutePaths);
-};
-
-const allPossibleExisting = [
-	".env.test",
-	".env.production",
-	".env.local",
-	".env",
-	".env.test.local",
-	".env.production.local",
-	".env.development.local",
-	".env.development",
-	".env.test.json",
-	".env.production.json",
-	".env.local.json",
-	".env.json",
-	".env.test.local.json",
-	".env.production.local.json",
-	".env.development.local.json",
-	".env.development.json",
-	"src/.env.test",
-	"src/.env.production",
-	"src/.env.local",
-	"src/.env",
-	"src/.env.test.local",
-	"src/.env.production.local",
-	"src/.env.development.local",
-	"src/.env.development",
-	"src/.env.test.json",
-	"src/.env.production.json",
-	"src/.env.local.json",
-	"src/.env.json",
-	"src/.env.test.local.json",
-	"src/.env.production.local.json",
-	"src/.env.development.local.json",
-	"src/.env.development.json",
-	"coverage/.env.test",
-	"coverage/.env.production",
-	"coverage/.env.local",
-	"coverage/.env",
-	"coverage/.env.test.local",
-	"coverage/.env.production.local",
-	"coverage/.env.development.local",
-	"coverage/.env.development",
-	"coverage/.env.test.json",
-	"coverage/.env.production.json",
-	"coverage/.env.local.json",
-	"coverage/.env.json",
-	"coverage/.env.test.local.json",
-	"coverage/.env.production.local.json",
-	"coverage/.env.development.local.json",
-	"coverage/.env.development.json"
-];
+const comparePathArrays = comparePathArraysFactory(getAbsoluteFromRelative);
 
 describe("resolve-node-configs-hierarchy getConfigFiles tests", () => {
 	it("should pass without existing files", async () => {
