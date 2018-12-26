@@ -1,15 +1,20 @@
 import { sync as del } from "del";
-import { accessSync, mkdirSync, realpathSync, writeFileSync } from "fs";
-import { dirname, join, resolve } from "path";
+import { accessSync, mkdirSync, writeFileSync } from "fs";
+import { dirname, join } from "path";
+import {
+	allPossibleExistingFiles as allPossibleExisting,
+	comparePathArrays as comparePathArraysFactory,
+	getAbsoluteFromRelative as getAbsoluteFromRelativeFactory,
+	resolvePath
+} from "./util/test-utils";
 
 let getEnvFuncs;
 let getConfigFiles;
 let getConfigFile;
 
 const filesFolderName = "test-files";
-const resolvePath = relativePath => resolve(realpathSync(process.cwd()), relativePath);
 const getRelativePathForTests = relativePath => join(filesFolderName, relativePath);
-const getAbsoluteFromRelative = rel => `${process.cwd()}/${getRelativePathForTests(rel)}`;
+const getAbsoluteFromRelative = getAbsoluteFromRelativeFactory(getRelativePathForTests);
 
 const importGetConfigFiles = () => {
 	const resolveNodeConfigsHierarchy = require("../src/resolve-node-configs-hierarchy");
@@ -34,9 +39,6 @@ const configureEnvMock = envValue => {
 	importGetConfigFiles();
 };
 
-const getAbsolutePaths = relPaths =>
-	relPaths.map(relPath => getRelativePathForTests(relPath)).map(relPath => resolvePath(relPath));
-
 const ensureDirectoryExistence = filePath => {
 	const dirName = dirname(filePath);
 	try {
@@ -49,64 +51,12 @@ const ensureDirectoryExistence = filePath => {
 };
 
 const configureExistingPaths = relPaths =>
-	getAbsolutePaths(relPaths)
+	relPaths
+		.map(getAbsoluteFromRelative)
 		.map(ensureDirectoryExistence)
 		.forEach(path => writeFileSync(path, "1"));
 
-const comparePathArrays = (expectedRelPaths, actualAbsolutePaths) => {
-	expect(getAbsolutePaths(expectedRelPaths)).toEqual(actualAbsolutePaths);
-};
-
-const allPossibleExisting = [
-	".env.test",
-	".env.production",
-	".env.local",
-	".env",
-	".env.test.local",
-	".env.production.local",
-	".env.development.local",
-	".env.development",
-	".env.test.json",
-	".env.production.json",
-	".env.local.json",
-	".env.json",
-	".env.test.local.json",
-	".env.production.local.json",
-	".env.development.local.json",
-	".env.development.json",
-	"src/.env.test",
-	"src/.env.production",
-	"src/.env.local",
-	"src/.env",
-	"src/.env.test.local",
-	"src/.env.production.local",
-	"src/.env.development.local",
-	"src/.env.development",
-	"src/.env.test.json",
-	"src/.env.production.json",
-	"src/.env.local.json",
-	"src/.env.json",
-	"src/.env.test.local.json",
-	"src/.env.production.local.json",
-	"src/.env.development.local.json",
-	"src/.env.development.json",
-	"coverage/.env.test",
-	"coverage/.env.production",
-	"coverage/.env.local",
-	"coverage/.env",
-	"coverage/.env.test.local",
-	"coverage/.env.production.local",
-	"coverage/.env.development.local",
-	"coverage/.env.development",
-	"coverage/.env.test.json",
-	"coverage/.env.production.json",
-	"coverage/.env.local.json",
-	"coverage/.env.json",
-	"coverage/.env.test.local.json",
-	"coverage/.env.production.local.json",
-	"coverage/.env.development.local.json",
-	"coverage/.env.development.json"
-];
+const comparePathArrays = comparePathArraysFactory(getAbsoluteFromRelative);
 
 afterEach(() => {
 	try {
