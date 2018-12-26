@@ -8,11 +8,16 @@ So the library allows to manage configurations for any environment and the same 
 
 **Note** Don't forget to put `local` files to `.gitignore`.
 
+- [Changelog](#changelog)
 - [Documentation](#documentation)
 	- [getConfigFiles](#getconfigfiles)
 	- [getConfigFile](#getconfigfile)
 - [Installation](#installation)
 - [Usage](#usage)
+
+## Changelog
+
+Versions [changelog](CHANGELOG.md).
 
 ## Documentation
 
