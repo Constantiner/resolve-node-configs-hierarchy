@@ -17,24 +17,27 @@ const separatePathAndExtension = path => {
 	return { path: resultingPath, ext: extension };
 };
 
-// https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use
-const getHierarchicConfigsArray = (nodeEnvFunc, includeTestLocals) => ({ path, ext }) => {
-	const nodeEnv = nodeEnvFunc();
-	return [
+const canIncludeLocal = (nodeEnv, includeTestLocals) => nodeEnv !== "test" || includeTestLocals;
+
+const produceHierarchicConfigsArray = (nodeEnv, includeTestLocals, path, ext) =>
+	[
 		// Don't include `*.local.*` files for `test` environment
 		// since normally you expect tests to produce the same
 		// results for everyone
-		(nodeEnv !== "test" || includeTestLocals) && `${path}.${nodeEnv}.local`,
+		canIncludeLocal(nodeEnv, includeTestLocals) && `${path}.${nodeEnv}.local`,
 		// Don't include `*.local.*` files for `test` environment
 		// since normally you expect tests to produce the same
 		// results for everyone
-		(nodeEnv !== "test" || includeTestLocals) && `${path}.local`,
+		canIncludeLocal(nodeEnv, includeTestLocals) && `${path}.local`,
 		`${path}.${nodeEnv}`,
 		path
 	]
 		.filter(Boolean)
 		.map(path => (ext ? `${path}.${ext}` : path));
-};
+
+// https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use
+const getHierarchicConfigsArray = (nodeEnvFunc, includeTestLocals) => ({ path, ext }) =>
+	produceHierarchicConfigsArray(nodeEnvFunc(), includeTestLocals, path, ext);
 
 const filterFiles = filterFunc => files => files.filter(filterFunc);
 
