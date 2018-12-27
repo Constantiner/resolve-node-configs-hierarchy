@@ -1,7 +1,8 @@
 import acompose from "@constantiner/fun-ctional/acompose";
 import afilter from "@constantiner/fun-ctional/afilter";
-import { fileExists, resolvePath } from "./util/fsUtils";
+import { fileExists, fileExistsSync, resolvePath, resolvePathSync } from "./util/fsUtils";
 import { getEnv } from "./util/getEnv";
+import compose from "./util/compose";
 
 const separatePathAndExtension = path => {
 	const pathParts = path.split("/");
@@ -34,6 +35,8 @@ const getHierarchicConfigsArray = (nodeEnvFunc, includeTestLocals) => ({ path, e
 		.filter(Boolean)
 		.map(path => (ext ? `${path}.${ext}` : path));
 };
+
+const filterFiles = filterFunc => files => files.filter(filterFunc);
 
 /**
  * Returns a list of absolute file paths of existing files in the order to apply from first to last (in order of precedence).
@@ -88,6 +91,14 @@ const getConfigFiles = (file, includeTestLocals = false) =>
 		resolvePath
 	)(file);
 
+const getConfigFilesSync = (file, includeTestLocals = false) =>
+	compose(
+		filterFiles(fileExistsSync),
+		getHierarchicConfigsArray(getEnv, includeTestLocals),
+		separatePathAndExtension,
+		resolvePathSync
+	)(file);
+
 /**
  * Returns the most relevant absolute file path of existing files in files hierarchy.
  *
@@ -137,4 +148,9 @@ const getConfigFile = async (file, includeTestLocals = false) => {
 	return files.length > 0 ? files[0] : null;
 };
 
-export { getConfigFiles, getConfigFile };
+const getConfigFileSync = (file, includeTestLocals = false) => {
+	const files = getConfigFilesSync(file, includeTestLocals);
+	return files.length > 0 ? files[0] : null;
+};
+
+export { getConfigFiles, getConfigFile, getConfigFilesSync, getConfigFileSync };
