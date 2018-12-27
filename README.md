@@ -12,6 +12,8 @@ So the library allows to manage configurations for any environment and the same 
 - [Documentation](#documentation)
 	- [getConfigFiles](#getconfigfiles)
 	- [getConfigFile](#getconfigfile)
+	- [getConfigFilesSync](#getconfigfilessync)
+	- [getConfigFileSync](#getconfigfilesync)
 - [Installation](#installation)
 - [Usage](#usage)
 
@@ -53,7 +55,7 @@ for example if you pass `"configuration/log4js.json"` it will produce the follow
 * `<project_path>/configuration/log4js.development.json`
 * `<project_path>/configuration/log4js.json`
 
-This utility is asynchronous and returns a promise resolving to file list.
+This utility is asynchronous and returns a promise resolving to file list. Use [`getConfigFilesSync`](#getconfigfilessync) for synchronous version.
 
 This utility was inspired by [create-react-app](https://github.com/facebook/create-react-app) and may contain some chunks of code from it.
 
@@ -67,7 +69,15 @@ for example if you pass `"configuration/log4js.json"` it will return the followi
 
 * `<project_path>/configuration/log4js.development.local.json`
 
-This utility is asynchronous and returns a promise resolving to absolute file path as `String` (or resolving to `null`).
+This utility is asynchronous and returns a promise resolving to absolute file path as `String` (or resolving to `null`). Use [`getConfigFileSync`](#getconfigfilesync) for synchronous version.
+
+### getConfigFilesSync
+
+Synchronous version of [`getConfigFiles`](#getconfigfiles).
+
+### getConfigFileSync
+
+Synchronous version of [`getConfigFile`](#getconfigfile).
 
 ## Installation
 
@@ -108,8 +118,6 @@ getConfigFile("src/.env").then(filePath => {
 
 ```
 
-
-
 To include `local` files in `test` environment you may pass corresponding flag (it is `false` by default):
 
 ```JavaScript
@@ -130,4 +138,31 @@ getConfigFile("src/.env", true).then(filePath => {
 		const config = require(filePath);
 	}
 });
+```
+
+The same is for synchronous versions:
+
+```JavaScript
+import { getConfigFilesSync } from "@constantiner/resolve-node-configs-hierarchy";
+```
+
+Then you can use it:
+
+```JavaScript
+getConfigFilesSync("src/.env").forEach(file => {
+	dotenv.config({
+		path: file
+	})
+});
+```
+
+Or for getting the single most actual config file:
+
+```JavaScript
+import { getConfigFileSync } from "@constantiner/resolve-node-configs-hierarchy";
+
+const filePath = getConfigFileSync("src/.env");
+if (filePath) {
+	const config = require(filePath);
+}
 ```
