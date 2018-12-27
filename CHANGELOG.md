@@ -1,12 +1,23 @@
 # Change Log
 
+## [0.4.0](https://github.com/Constantiner/resolve-node-configs-hierarchy/tree/0.4.0) (2018-12-27)
+[Full Changelog](https://github.com/Constantiner/resolve-node-configs-hierarchy/compare/0.3.1...0.4.0)
+
+**Implemented enhancements:**
+
+- Add synchronous versions of utilities [\#1](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/1)
+
+**Merged pull requests:**
+
+- Add synchronous versions of utilities [\#6](https://github.com/Constantiner/resolve-node-configs-hierarchy/pull/6) ([Constantiner](https://github.com/Constantiner))
+
 ## [0.3.1](https://github.com/Constantiner/resolve-node-configs-hierarchy/tree/0.3.1) (2018-12-26)
 [Full Changelog](https://github.com/Constantiner/resolve-node-configs-hierarchy/compare/0.3.0...0.3.1)
 
 **Implemented enhancements:**
 
-- Add integration tests [\#3](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/3)
 - Use fs.access to check file existence [\#2](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/2)
+- Add integration tests [\#3](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/3)
 
 **Merged pull requests:**
 
