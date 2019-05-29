@@ -33,11 +33,6 @@
 		"url": "https://github.com/Constantiner/resolve-node-configs-hierarchy/issues"
 	},
 	"homepage": "https://github.com/Constantiner/resolve-node-configs-hierarchy#readme",
-	"prettier": {
-		"printWidth": 120,
-		"useTabs": true,
-		"tabWidth": 4
-	},
 	"engines": {
 		"node": ">=7.6",
 		"npm": ">=5.2.0"
@@ -60,7 +55,7 @@
 		"jest-pnp-resolver": "^1.0.2",
 		"lint-staged": "^8.1.0",
 		"mock-fs": "^4.7.0",
-		"prettier": "^1.15.3",
+		"prettier": "^1.17.1",
 		"regenerator-runtime": "^0.12.1"
 	},
 	"dependencies": {
