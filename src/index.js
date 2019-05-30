@@ -1,7 +1,7 @@
 import { acompose, afilter } from "@constantiner/fun-ctional";
 import compose from "./util/compose";
 import { fileExists, fileExistsSync, resolvePath, resolvePathSync } from "./util/fsUtils";
-import { getEnv } from "./util/getEnv";
+import { getEnvironment } from "./util/getEnvironment";
 
 const separatePathAndExtension = path => {
 	const pathParts = path.split("/");
@@ -13,30 +13,30 @@ const separatePathAndExtension = path => {
 		fileName = fileNameParts.join(".");
 	}
 	const resultingPath = `${pathParts.join("/")}/${fileName}`;
-	return { path: resultingPath, ext: extension };
+	return { path: resultingPath, extension };
 };
 
-const canIncludeLocal = (nodeEnv, includeTestLocals) => nodeEnv !== "test" || includeTestLocals;
+const canIncludeLocal = (nodeEnvironment, includeTestLocals) => nodeEnvironment !== "test" || includeTestLocals;
 
-const produceHierarchicConfigsArray = (nodeEnv, includeTestLocals, path, ext) =>
+const produceHierarchicConfigsArray = (nodeEnvironment, includeTestLocals, path, extension) =>
 	[
 		// Don't include `*.local.*` files for `test` environment
 		// since normally you expect tests to produce the same
 		// results for everyone
-		canIncludeLocal(nodeEnv, includeTestLocals) && `${path}.${nodeEnv}.local`,
+		canIncludeLocal(nodeEnvironment, includeTestLocals) && `${path}.${nodeEnvironment}.local`,
 		// Don't include `*.local.*` files for `test` environment
 		// since normally you expect tests to produce the same
 		// results for everyone
-		canIncludeLocal(nodeEnv, includeTestLocals) && `${path}.local`,
-		`${path}.${nodeEnv}`,
+		canIncludeLocal(nodeEnvironment, includeTestLocals) && `${path}.local`,
+		`${path}.${nodeEnvironment}`,
 		path
 	]
 		.filter(Boolean)
-		.map(path => (ext ? `${path}.${ext}` : path));
+		.map(path => (extension ? `${path}.${extension}` : path));
 
 // https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use
-const getHierarchicConfigsArray = (nodeEnvFunc, includeTestLocals) => ({ path, ext }) =>
-	produceHierarchicConfigsArray(nodeEnvFunc(), includeTestLocals, path, ext);
+const getHierarchicConfigsArray = (nodeEnvironmentFunc, includeTestLocals) => ({ path, extension }) =>
+	produceHierarchicConfigsArray(nodeEnvironmentFunc(), includeTestLocals, path, extension);
 
 const filterFiles = filterFunc => files => files.filter(filterFunc);
 
@@ -89,7 +89,7 @@ const filterFiles = filterFunc => files => files.filter(filterFunc);
 const getConfigFiles = (file, includeTestLocals = false) =>
 	acompose(
 		afilter(fileExists),
-		getHierarchicConfigsArray(getEnv, includeTestLocals),
+		getHierarchicConfigsArray(getEnvironment, includeTestLocals),
 		separatePathAndExtension,
 		resolvePath
 	)(file);
@@ -142,7 +142,7 @@ const getConfigFiles = (file, includeTestLocals = false) =>
 const getConfigFilesSync = (file, includeTestLocals = false) =>
 	compose(
 		filterFiles(fileExistsSync),
-		getHierarchicConfigsArray(getEnv, includeTestLocals),
+		getHierarchicConfigsArray(getEnvironment, includeTestLocals),
 		separatePathAndExtension,
 		resolvePathSync
 	)(file);

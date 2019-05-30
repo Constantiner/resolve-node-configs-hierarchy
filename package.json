@@ -2,7 +2,7 @@
 	"name": "@constantiner/resolve-node-configs-hierarchy",
 	"version": "0.4.0",
 	"description": "Simple library to resolve configuration files hierarchy in Node projects for producing effective configuration from them",
-	"main": "resolve-node-configs-hierarchy",
+	"main": "index",
 	"scripts": {
 		"test": "npx jest --config jest.config.json",
 		"lint": "npx eslint '**/*.js'",
@@ -48,6 +48,7 @@
 		"eslint": "^5.16.0",
 		"eslint-config-prettier": "^4.3.0",
 		"eslint-plugin-prettier": "^3.1.0",
+		"eslint-plugin-unicorn": "^8.0.2",
 		"gulp": "^4.0.2",
 		"gulp-better-rollup": "^4.0.1",
 		"gulp-rename": "^1.4.0",

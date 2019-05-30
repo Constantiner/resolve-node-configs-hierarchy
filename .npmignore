@@ -7,3 +7,8 @@ coverage
 .*
 gulpfile.js
 babel.config.js
+jest.config.json
+jsconfig.json
+
+# Folder with files for integration tests
+test-files
