@@ -5,7 +5,8 @@
 	},
 	"env": {
 		"es6": true,
-		"node": true
+		"node": true,
+		"jest": true
 	},
 	"rules": {
 		"semi": ["error", "always"],
@@ -22,5 +23,10 @@
 			}
 		]
 	},
-	"extends": ["eslint:recommended", "plugin:prettier/recommended", "plugin:unicorn/recommended"]
+	"extends": [
+		"eslint:recommended",
+		"plugin:prettier/recommended",
+		"plugin:unicorn/recommended",
+		"plugin:jest/recommended"
+	]
 }
