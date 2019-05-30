@@ -11,5 +11,5 @@
 	"rules": {
 		"semi": ["error", "always"]
 	},
-	"extends": ["eslint:recommended", "prettier"]
+	"extends": ["eslint:recommended", "plugin:prettier/recommended"]
 }
