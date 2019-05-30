@@ -1,12 +1,19 @@
 {
 	"collectCoverageFrom": ["<rootDir>/src/**/*.js", "!<rootDir>/src/util/**/*.js"],
 	"coverageDirectory": "<rootDir>/coverage/",
+	"coverageThreshold": {
+		"global": {
+			"branches": 100,
+			"functions": 100,
+			"lines": 100,
+			"statements": 100
+		}
+	},
 	"collectCoverage": true,
-	"resolver": "jest-pnp-resolver",
 	"testMatch": ["<rootDir>/__tests__/**/*.js"],
 	"testEnvironment": "node",
 	"transform": {
-		"^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest"
+		"^.+\\.js$": "<rootDir>/node_modules/babel-jest"
 	},
 	"transformIgnorePatterns": ["<rootDir>/node_modules/(?!@constantiner)/"],
 	"testPathIgnorePatterns": ["<rootDir>/node_modules/", "<rootDir>/__tests__/util/"]
