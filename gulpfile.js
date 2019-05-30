@@ -20,10 +20,10 @@ let banner = `/**
 
 `;
 
-gulp.task("clean", () => del(["dist", "*.js", "*.mjs", "*.map", "!gulpfile.js", "!babel.config.js"]));
+gulp.task("clean", () => del(["*.js", "*.mjs", "*.map", "!gulpfile.js", "!babel.config.js"]));
 
 const getSourceFile = () => gulp.src(SOURCES),
-	getDest = () => gulp.dest("."),
+	getDestination = () => gulp.dest("."),
 	proceedEs6Modules = () => {
 		const licenseText = fs.readFileSync("./LICENSE", "utf-8");
 		banner = `/**
@@ -49,9 +49,9 @@ ${licenseText.replace(/^/gm, " * ")}
 					}
 				)
 			)
-			.pipe(getDest())
+			.pipe(getDestination())
 			.pipe(rename({ extname: `.mjs` }))
-			.pipe(getDest());
+			.pipe(getDestination());
 	};
 
 gulp.task("es6modules", () => proceedEs6Modules());

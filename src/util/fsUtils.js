@@ -1,4 +1,4 @@
-import { realpath, realpathSync, access, accessSync, constants } from "fs";
+import { access, accessSync, constants, realpath, realpathSync } from "fs";
 import { resolve } from "path";
 import { promisify } from "util";
 

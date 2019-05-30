@@ -54,10 +54,11 @@ const allPossibleExistingFiles = [
 
 const resolvePath = relativePath => resolve(realpathSync(process.cwd()), relativePath);
 
-const getAbsoluteFromRelative = (relPathTransformer = path => path) => rel => resolvePath(relPathTransformer(rel));
+const getAbsoluteFromRelative = (relativePathTransformer = path => path) => relative =>
+	resolvePath(relativePathTransformer(relative));
 
-const comparePathArrays = relativeToAbsoluteFn => (expectedRelPaths, actualAbsolutePaths) => {
-	expect(expectedRelPaths.map(relativeToAbsoluteFn)).toEqual(actualAbsolutePaths);
+const comparePathArrays = relativeToAbsoluteFn => (expectedRelativePaths, actualAbsolutePaths) => {
+	expect(expectedRelativePaths.map(relativeToAbsoluteFn)).toEqual(actualAbsolutePaths);
 };
 
 export { allPossibleExistingFiles, getAbsoluteFromRelative, comparePathArrays, resolvePath };
