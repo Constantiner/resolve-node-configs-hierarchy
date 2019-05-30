@@ -1,5 +1,4 @@
-import acompose from "@constantiner/fun-ctional/acompose";
-import afilter from "@constantiner/fun-ctional/afilter";
+import { acompose, afilter } from "@constantiner/fun-ctional";
 import compose from "./util/compose";
 import { fileExists, fileExistsSync, resolvePath, resolvePathSync } from "./util/fsUtils";
 import { getEnv } from "./util/getEnv";
