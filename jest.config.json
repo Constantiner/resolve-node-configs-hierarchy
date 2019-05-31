@@ -1,5 +1,5 @@
 {
-	"collectCoverageFrom": ["<rootDir>/src/**/*.js", "!<rootDir>/src/util/**/*.js"],
+	"collectCoverageFrom": ["<rootDir>/src/**/*.js"],
 	"coverageDirectory": "<rootDir>/coverage/",
 	"coverageThreshold": {
 		"global": {
@@ -16,5 +16,5 @@
 		"^.+\\.js$": "<rootDir>/node_modules/babel-jest"
 	},
 	"transformIgnorePatterns": ["<rootDir>/node_modules/(?!@constantiner)/"],
-	"testPathIgnorePatterns": ["<rootDir>/node_modules/", "<rootDir>/__tests__/util/"]
+	"testPathIgnorePatterns": ["<rootDir>/node_modules/", "<rootDir>/__tests__/testUtil/"]
 }
