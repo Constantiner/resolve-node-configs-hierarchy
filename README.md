@@ -1,5 +1,7 @@
 # resolve-node-configs-hierarchy<!-- omit in toc -->
 
+[![Build Status](https://travis-ci.org/Constantiner/resolve-node-configs-hierarchy.svg?branch=master)](https://travis-ci.org/Constantiner/resolve-node-configs-hierarchy) [![codecov](https://codecov.io/gh/Constantiner/resolve-node-configs-hierarchy/branch/master/graph/badge.svg)](https://codecov.io/gh/Constantiner/resolve-node-configs-hierarchy)
+
 Simple library to resolve configuration files hierarchy in Node projects for producing effective configuration from them.
 
 It is very convenient if you need to have local configuration for local environment and not place it in version control system. Or to have separate configurations for `development` or `test` or `production` environments to apply them automatically.
