@@ -1,6 +1,7 @@
 src
 __tests__
 node_modules
+scripts
 .DS_Store
 package-lock.json
 coverage

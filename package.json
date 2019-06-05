@@ -4,7 +4,9 @@
 	"description": "Simple library to resolve configuration files hierarchy in Node projects for producing effective configuration from them",
 	"main": "index",
 	"scripts": {
-		"test": "npx jest --config jest.config.json",
+		"test": "node -r esm scripts/unitTest.js",
+		"test:coverage": "npm test -- --coverage",
+		"test:watch": "node -r esm scripts/unitTestWatch.js",
 		"lint": "npx eslint '**/*.js'",
 		"build": "npx gulp clean && npx gulp es6modules",
 		"format": "npx prettier 'src/*.js' '__tests__/*.js' --write",
@@ -49,16 +51,17 @@
 		"eslint-config-prettier": "^4.3.0",
 		"eslint-plugin-jest": "^22.6.4",
 		"eslint-plugin-prettier": "^3.1.0",
-		"eslint-plugin-unicorn": "^8.0.2",
+		"eslint-plugin-unicorn": "^9.0.0",
+		"esm": "^3.2.25",
 		"gulp": "^4.0.2",
 		"gulp-better-rollup": "^4.0.1",
 		"gulp-rename": "^1.4.0",
 		"husky": "^2.3.0",
 		"jest": "^24.8.0",
 		"lint-staged": "^8.1.7",
-		"mock-fs": "^4.10.0",
+		"mock-fs": "^4.10.1",
 		"prettier": "^1.17.1",
-		"rollup": "^1.12.5"
+		"rollup": "^1.14.0"
 	},
 	"dependencies": {
 		"@constantiner/fun-ctional": "^0.6.6"
