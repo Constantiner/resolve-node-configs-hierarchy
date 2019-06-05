@@ -1,7 +1,6 @@
 const gulp = require("gulp");
 const rename = require("gulp-rename");
 const pkg = require("./package.json");
-const del = require("del");
 const rollup = require("gulp-better-rollup");
 const SOURCES = "src/*.js";
 const fs = require("fs");
@@ -19,8 +18,6 @@ let banner = `/**
  */
 
 `;
-
-gulp.task("clean", () => del(["*.js", "*.mjs", "*.map", "!gulpfile.js", "!babel.config.js"]));
 
 const getSourceFile = () => gulp.src(SOURCES),
 	getDestination = () => gulp.dest("."),
@@ -58,4 +55,4 @@ gulp.task("es6modules", () => proceedEs6Modules());
 
 gulp.task("scripts", gulp.series("es6modules"));
 
-gulp.task("default", gulp.series("clean", "scripts"));
+gulp.task("default", gulp.series("scripts"));
