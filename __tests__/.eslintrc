@@ -21,12 +21,19 @@
 					"obj": true
 				}
 			}
+		],
+		"node/no-unsupported-features/es-syntax": [
+			"error",
+			{
+				"ignores": ["modules"]
+			}
 		]
 	},
 	"extends": [
 		"eslint:recommended",
 		"plugin:prettier/recommended",
 		"plugin:unicorn/recommended",
-		"plugin:jest/recommended"
+		"plugin:jest/recommended",
+		"plugin:node/recommended"
 	]
 }
