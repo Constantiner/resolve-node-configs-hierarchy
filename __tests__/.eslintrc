@@ -29,11 +29,14 @@
 			}
 		]
 	},
+	"plugins": ["import"],
 	"extends": [
 		"eslint:recommended",
 		"plugin:prettier/recommended",
 		"plugin:unicorn/recommended",
 		"plugin:jest/recommended",
-		"plugin:node/recommended"
+		"plugin:node/recommended",
+		"plugin:import/errors",
+		"plugin:import/warnings"
 	]
 }
