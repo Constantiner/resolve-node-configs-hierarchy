@@ -1,3 +1,4 @@
+/* eslint-disable security/detect-object-injection */
 import {
 	allPossibleExistingFiles as allPossibleExisting,
 	comparePathArrays as comparePathArraysFactory,

@@ -53,6 +53,7 @@
 		"eslint-plugin-jest": "^22.6.4",
 		"eslint-plugin-node": "^9.1.0",
 		"eslint-plugin-prettier": "^3.1.0",
+		"eslint-plugin-security": "^1.4.0",
 		"eslint-plugin-unicorn": "^9.0.0",
 		"esm": "^3.2.25",
 		"gulp": "^4.0.2",
