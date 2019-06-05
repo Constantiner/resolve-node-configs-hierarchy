@@ -9,7 +9,7 @@
 			"statements": 100
 		}
 	},
-	"collectCoverage": true,
+	"collectCoverage": false,
 	"testMatch": ["<rootDir>/__tests__/**/*.js"],
 	"testEnvironment": "node",
 	"transform": {
