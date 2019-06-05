@@ -20,7 +20,22 @@
 					"obj": true
 				}
 			}
+		],
+		"node/no-unsupported-features/es-syntax": [
+			"error",
+			{
+				"ignores": ["modules"]
+			}
 		]
 	},
-	"extends": ["eslint:recommended", "plugin:prettier/recommended", "plugin:unicorn/recommended"]
+	"plugins": ["import", "security"],
+	"extends": [
+		"eslint:recommended",
+		"plugin:prettier/recommended",
+		"plugin:unicorn/recommended",
+		"plugin:node/recommended",
+		"plugin:import/errors",
+		"plugin:import/warnings",
+		"plugin:security/recommended"
+	]
 }
