@@ -68,8 +68,5 @@ typings/
 
 
 #distributive files
-/*.js
-/*.mjs
-/*.map
-!/gulpfile.js
-!/babel.config.js
+dist/
+esm/

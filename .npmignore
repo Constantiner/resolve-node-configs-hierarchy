@@ -10,6 +10,7 @@ gulpfile.js
 babel.config.js
 jest.config.json
 jsconfig.json
+rollup.config.js
 
 # Folder with files for integration tests
 test-files
