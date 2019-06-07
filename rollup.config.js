@@ -2,6 +2,7 @@ import { format } from "date-fns";
 import { readFileSync } from "fs";
 import { sync as globby } from "globby";
 import resolve from "rollup-plugin-node-resolve";
+import prettier from "rollup-plugin-prettier";
 import sourcemaps from "rollup-plugin-sourcemaps";
 
 const getBuildDate = () => format(new Date(), "DD MMMM YYYY");
@@ -47,7 +48,7 @@ const config = (format, folder) => input => ({
 		banner: getActualBanner()
 	},
 	external: ["path", "fs", "util"],
-	plugins: [resolve(), sourcemaps()]
+	plugins: [resolve(), prettier(), sourcemaps()]
 });
 
 const sourceFiles = getSourceFilesList();
