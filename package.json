@@ -15,7 +15,8 @@
 		"clean": "node -r esm scripts/clean.js",
 		"clear_jest": "npx jest --clearCache",
 		"lint-staged": "lint-staged",
-		"validate:sourcemaps": "node -r esm scripts/sourcemapsValidator.js"
+		"validate:sourcemaps": "node -r esm scripts/sourcemapsValidator.js",
+		"changelog": "node -r esm scripts/generateChangelog.js"
 	},
 	"repository": {
 		"type": "git",
