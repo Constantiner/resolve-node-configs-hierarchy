@@ -16,7 +16,12 @@
 		"clear_jest": "npx jest --clearCache",
 		"lint-staged": "lint-staged",
 		"validate:sourcemaps": "node -r esm scripts/sourcemapsValidator.js",
-		"changelog": "node -r esm scripts/generateChangelog.js"
+		"changelog": "node -r esm scripts/generateChangelog.js",
+		"version": "npm run changelog && git add CHANGELOG.md",
+		"postversion": "git push && git push --tags",
+		"version:patch": "npm version patch -m \"Upgrade to %s\"",
+		"version:minor": "npm version minor -m \"Upgrade to %s\"",
+		"version:major": "npm version major -m \"Upgrade to %s\""
 	},
 	"repository": {
 		"type": "git",
