@@ -1,28 +1,72 @@
 # Change Log
 
+## [v0.4.1](https://github.com/Constantiner/resolve-node-configs-hierarchy/tree/v0.4.1) (2019-06-07)
+[Full Changelog](https://github.com/Constantiner/resolve-node-configs-hierarchy/compare/0.4.0...v0.4.1)
+
+**Implemented enhancements:**
+
+- Include all sources in test coverage report [\#34](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/34)
+- Create clean script [\#28](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/28)
+- Fix vulnerabilities reported by NPM [\#26](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/26)
+- Rename resolve-node-configs-hierarchy.js to index.js [\#21](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/21)
+- Add CI support [\#20](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/20)
+- Add changelog generation [\#19](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/19)
+- Add sourcemaps validation script [\#18](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/18)
+- Refactor distribution files output [\#17](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/17)
+- Format distribution files with prettier [\#16](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/16)
+- Use Rollup for build [\#14](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/14)
+- Add watch mode support for tests [\#13](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/13)
+- Add cool ESLint plugins to improve code quality [\#12](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/12)
+- Override ESLint rules for tests [\#11](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/11)
+- Add eslint-plugin-unicorn support [\#10](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/10)
+- Revise Husky and lint-staged configuration [\#9](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/9)
+- Extract Prettier configuration into separate files [\#7](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/7)
+
+**Fixed bugs:**
+
+- Prettier rules do not work in ESLint configuration [\#8](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/8)
+
+**Merged pull requests:**
+
+- Add changelog generation [\#42](https://github.com/Constantiner/resolve-node-configs-hierarchy/pull/42)
+- Format distribution files with prettier [\#41](https://github.com/Constantiner/resolve-node-configs-hierarchy/pull/41)
+- Add sourcemaps validation script [\#40](https://github.com/Constantiner/resolve-node-configs-hierarchy/pull/40)
+- Use Rollup for build [\#39](https://github.com/Constantiner/resolve-node-configs-hierarchy/pull/39)
+- Create clean script [\#38](https://github.com/Constantiner/resolve-node-configs-hierarchy/pull/38)
+- Add cool ESLint plugins to improve code quality [\#37](https://github.com/Constantiner/resolve-node-configs-hierarchy/pull/37)
+- Add watch mode support for tests [\#36](https://github.com/Constantiner/resolve-node-configs-hierarchy/pull/36)
+- Include all sources in test coverage report [\#35](https://github.com/Constantiner/resolve-node-configs-hierarchy/pull/35)
+- Add CI support [\#33](https://github.com/Constantiner/resolve-node-configs-hierarchy/pull/33)
+- Override ESLint rules for tests [\#32](https://github.com/Constantiner/resolve-node-configs-hierarchy/pull/32)
+- Add eslint-plugin-unicorn support [\#31](https://github.com/Constantiner/resolve-node-configs-hierarchy/pull/31)
+- Revise Husky and lint-staged configuration [\#30](https://github.com/Constantiner/resolve-node-configs-hierarchy/pull/30)
+- Prettier rules do not work in ESLint configuration [\#29](https://github.com/Constantiner/resolve-node-configs-hierarchy/pull/29)
+- Fix vulnerabilities reported by NPM [\#27](https://github.com/Constantiner/resolve-node-configs-hierarchy/pull/27)
+- Extract Prettier configuration into separate files [\#25](https://github.com/Constantiner/resolve-node-configs-hierarchy/pull/25)
+
 ## [0.4.0](https://github.com/Constantiner/resolve-node-configs-hierarchy/tree/0.4.0) (2018-12-27)
 [Full Changelog](https://github.com/Constantiner/resolve-node-configs-hierarchy/compare/0.3.1...0.4.0)
 
 **Implemented enhancements:**
 
+- Use fs.access to check file existence [\#2](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/2)
 - Add synchronous versions of utilities [\#1](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/1)
 
 **Merged pull requests:**
 
-- Add synchronous versions of utilities [\#6](https://github.com/Constantiner/resolve-node-configs-hierarchy/pull/6) ([Constantiner](https://github.com/Constantiner))
+- Add synchronous versions of utilities [\#6](https://github.com/Constantiner/resolve-node-configs-hierarchy/pull/6)
 
 ## [0.3.1](https://github.com/Constantiner/resolve-node-configs-hierarchy/tree/0.3.1) (2018-12-26)
 [Full Changelog](https://github.com/Constantiner/resolve-node-configs-hierarchy/compare/0.3.0...0.3.1)
 
 **Implemented enhancements:**
 
-- Use fs.access to check file existence [\#2](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/2)
 - Add integration tests [\#3](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/3)
 
 **Merged pull requests:**
 
-- Add integration tests [\#5](https://github.com/Constantiner/resolve-node-configs-hierarchy/pull/5) ([Constantiner](https://github.com/Constantiner))
-- Use fs.access to check file existence [\#4](https://github.com/Constantiner/resolve-node-configs-hierarchy/pull/4) ([Constantiner](https://github.com/Constantiner))
+- Add integration tests [\#5](https://github.com/Constantiner/resolve-node-configs-hierarchy/pull/5)
+- Use fs.access to check file existence [\#4](https://github.com/Constantiner/resolve-node-configs-hierarchy/pull/4)
 
 ## [0.3.0](https://github.com/Constantiner/resolve-node-configs-hierarchy/tree/0.3.0) (2018-12-20)
 [Full Changelog](https://github.com/Constantiner/resolve-node-configs-hierarchy/compare/0.2.0...0.3.0)
