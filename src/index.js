@@ -81,8 +81,8 @@ const filterFiles = filterFunc => files => files.filter(filterFunc);
  * and may contain some chunks of code from it.
  *
  * @param {string} file Relative path (from project root) to base file location (for example "config/.env").
- * @param {boolean} includeTestLocals Default to false. If true it includes files with "local" in name for test environment.
- * @returns {Promise<Array<String>>} A promise resolving to array of absolute file names.
+ * @param {boolean} [includeTestLocals=false] Default to false. If true it includes files with "local" in name for test environment.
+ * @returns {Promise<Array<string>>} A promise resolving to array of absolute file names.
  *
  * @see https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use
  */
@@ -134,8 +134,8 @@ const getConfigFiles = (file, includeTestLocals = false) =>
  * and may contain some chunks of code from it.
  *
  * @param {string} file Relative path (from project root) to base file location (for example "config/.env").
- * @param {boolean} includeTestLocals Default to false. If true it includes files with "local" in name for test environment.
- * @returns {Array<String>} An array of absolute file paths.
+ * @param {boolean} [includeTestLocals=false] Default to false. If true it includes files with "local" in name for test environment.
+ * @returns {Array<string>} An array of absolute file paths.
  *
  * @see https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use
  */
@@ -187,8 +187,8 @@ const getConfigFilesSync = (file, includeTestLocals = false) =>
  * and may contain some chunks of code from it.
  *
  * @param {string} file Relative path (from project root) to base file location (for example "config/.env").
- * @param {boolean} includeTestLocals Default to false. If true it includes files with "local" in name for test environment.
- * @returns {Promise<String>} A promise resolving to absolute file name or to `null`.
+ * @param {boolean} [includeTestLocals=false] Default to false. If true it includes files with "local" in name for test environment.
+ * @returns {Promise<string|null>} A promise resolving to absolute file name or to `null`.
  *
  * @see https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use
  */
@@ -236,8 +236,8 @@ const getConfigFile = async (file, includeTestLocals = false) => {
  * and may contain some chunks of code from it.
  *
  * @param {string} file Relative path (from project root) to base file location (for example "config/.env").
- * @param {boolean} includeTestLocals Default to false. If true it includes files with "local" in name for test environment.
- * @returns {String|null} An absolute file path or `null`.
+ * @param {boolean} [includeTestLocals=false] Default to false. If true it includes files with "local" in name for test environment.
+ * @returns {string|null} An absolute file path or `null`.
  *
  * @see https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use
  */
