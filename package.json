@@ -4,13 +4,15 @@
 	"description": "Simple library to resolve configuration files hierarchy in Node projects for producing effective configuration from them",
 	"main": "dist/index.js",
 	"module": "esm/index.js",
+	"types": "types/index.d.ts",
 	"scripts": {
 		"test": "node -r esm scripts/unitTest.js",
 		"test:coverage": "npm test -- --coverage",
 		"test:watch": "node -r esm scripts/unitTestWatch.js",
 		"lint": "npx eslint '**/*.js'",
-		"build": "npm run clean && npx rollup -c",
+		"build": "npm run clean && npx rollup -c && npm run types",
 		"format": "npx prettier 'src/*.js' '__tests__/*.js' --write",
+		"types": "npx jsdoc -c jsdoc.conf.json",
 		"prepublishOnly": "npm run clean && npm run lint && npm run test && npm run build",
 		"clean": "node -r esm scripts/clean.js",
 		"clear_jest": "npx jest --clearCache",
@@ -67,6 +69,7 @@
 		"globby": "^9.2.0",
 		"husky": "^2.4.0",
 		"jest": "^24.8.0",
+		"jsdoc": "^3.6.2",
 		"lint-staged": "^8.2.0",
 		"mock-fs": "^4.10.1",
 		"prettier": "^1.17.1",
@@ -74,7 +77,8 @@
 		"rollup-plugin-node-resolve": "^5.0.1",
 		"rollup-plugin-prettier": "^0.6.0",
 		"rollup-plugin-sourcemaps": "^0.4.2",
-		"sourcemap-validator": "^1.1.0"
+		"sourcemap-validator": "^1.1.0",
+		"tsd-jsdoc": "^2.3.0"
 	},
 	"dependencies": {}
 }
