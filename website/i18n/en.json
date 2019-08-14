@@ -3,7 +3,7 @@
   "localized-strings": {
     "next": "Next",
     "previous": "Previous",
-    "tagline": "Fights different environments configuration headaches for JavaScript/Node projects without pain",
+    "tagline": "Fights configuration headaches for JavaScript/Node projects in different environments without pain",
     "docs": {
       "doc1": {
         "title": "Latin-ish",

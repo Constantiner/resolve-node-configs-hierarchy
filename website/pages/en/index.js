@@ -13,6 +13,30 @@ const MarkdownBlock = CompLibrary.MarkdownBlock; /* Used to read markdown */
 const Container = CompLibrary.Container;
 const GridBlock = CompLibrary.GridBlock;
 
+const Button = props => (
+	<div className="pluginWrapper buttonWrapper">
+		<a className="button" href={props.href} target={props.target}>
+			{props.children}
+		</a>
+	</div>
+);
+
+const PromoSection = props => (
+	<div className="section promoSection">
+		<div className="promoRow">
+			<div className="pluginRowBlock">{props.children}</div>
+		</div>
+	</div>
+);
+
+const PromoSectionWitButtons = props => (
+	<PromoSection {...props}>
+		<Button href="#try">Try It Out</Button>
+		<Button href={props.docUrl("doc1.html")}>Example Link</Button>
+		<Button href={props.docUrl("doc2.html")}>Example Link 2</Button>
+	</PromoSection>
+);
+
 class HomeSplash extends React.Component {
 	render() {
 		const { siteConfig, language = "" } = this.props;
@@ -29,12 +53,6 @@ class HomeSplash extends React.Component {
 			</div>
 		);
 
-		const Logo = props => (
-			<div className="projectLogo">
-				<img src={props.img_src} alt="Project Logo" />
-			</div>
-		);
-
 		const ProjectTitle = () => (
 			<h2 className="projectTitle">
 				{siteConfig.title}
@@ -42,31 +60,17 @@ class HomeSplash extends React.Component {
 			</h2>
 		);
 
-		const PromoSection = props => (
-			<div className="section promoSection">
-				<div className="promoRow">
-					<div className="pluginRowBlock">{props.children}</div>
-				</div>
-			</div>
-		);
-
-		const Button = props => (
-			<div className="pluginWrapper buttonWrapper">
-				<a className="button" href={props.href} target={props.target}>
-					{props.children}
-				</a>
-			</div>
-		);
-
 		return (
 			<SplashContainer>
-				<Logo img_src={`${baseUrl}img/undraw_monitor.svg`} />
 				<div className="inner">
 					<ProjectTitle siteConfig={siteConfig} />
+					<PromoSectionWitButtons docUrl={docUrl} {...this.props} />
 					<PromoSection>
-						<Button href="#try">Try It Out</Button>
-						<Button href={docUrl("doc1.html")}>Example Link</Button>
-						<Button href={docUrl("doc2.html")}>Example Link 2</Button>
+						<MarkdownBlock>
+							[![Build
+							Status](https://travis-ci.org/Constantiner/resolve-node-configs-hierarchy.svg?branch=master)](https://travis-ci.org/Constantiner/resolve-node-configs-hierarchy)
+							[![codecov](https://codecov.io/gh/Constantiner/resolve-node-configs-hierarchy/branch/master/graph/badge.svg)](https://codecov.io/gh/Constantiner/resolve-node-configs-hierarchy)
+						</MarkdownBlock>
 					</PromoSection>
 				</div>
 			</SplashContainer>
@@ -77,7 +81,10 @@ class HomeSplash extends React.Component {
 class Index extends React.Component {
 	render() {
 		const { config: siteConfig, language = "" } = this.props;
-		const { baseUrl } = siteConfig;
+		const { baseUrl, docsUrl } = siteConfig;
+		const docsPart = `${docsUrl ? `${docsUrl}/` : ""}`;
+		const langPart = `${language ? `${language}/` : ""}`;
+		const docUrl = doc => `${baseUrl}${docsPart}${langPart}${doc}`;
 
 		const Block = props => (
 			<Container padding={["bottom", "top"]} id={props.id} background={props.background}>
@@ -85,69 +92,49 @@ class Index extends React.Component {
 			</Container>
 		);
 
-		const FeatureCallout = () => (
-			<div className="productShowcaseSection paddingBottom" style={{ textAlign: "center" }}>
-				<h2>Feature Callout</h2>
-				<MarkdownBlock>These are features of this project</MarkdownBlock>
-			</div>
-		);
-
-		const TryOut = () => (
-			<Block id="try">
+		const LocalEnvironmentsSection = () => (
+			<Block>
 				{[
 					{
 						content:
-							"To make your landing page more attractive, use illustrations! Check out " +
-							"[**unDraw**](https://undraw.co/) which provides you with customizable illustrations which are free to use. " +
-							"The illustrations you see on this page are from unDraw.",
-						image: `${baseUrl}img/undraw_code_review.svg`,
+							"With `resolve-node-configs-hierarchy` library you can create local versions of configuration files " +
+							"with some local-specific data (don't put them under version control!). " +
+							"For example, you can create your personal AWS S3 bucket for testing in local development environment " +
+							"and add corresponding keys to your local development configuration file " +
+							"(don't forget to add it to `.gitignore`). Without any line of code!",
+						image: `${baseUrl}img/undraw_local_environments.svg`,
 						imageAlign: "left",
-						title: "Wonderful SVG Illustrations"
+						title: "Set up local configurations"
 					}
 				]}
 			</Block>
 		);
 
-		const Description = () => (
+		const SimplePowerfulSection = () => (
 			<Block background="dark">
 				{[
 					{
-						content: "This is another description of how this project is useful",
-						image: `${baseUrl}img/undraw_note_list.svg`,
+						content:
+							"`resolve-node-configs-hierarchy` library is very simple and yet powerful. It takes almost no time to learn it.",
+						image: `${baseUrl}img/undraw_simple_powerful_api.svg`,
 						imageAlign: "right",
-						title: "Description"
+						title: "Very simple synchronous and asynchronous API"
 					}
 				]}
 			</Block>
 		);
 
-		const LearnHow = () => (
+		const DeploymentEnvironmentsSection = () => (
 			<Block background="light">
 				{[
 					{
-						content: "Each new Docusaurus project has **randomly-generated** theme colors.",
-						image: `${baseUrl}img/undraw_youtube_tutorial.svg`,
+						content:
+							"`resolve-node-configs-hierarchy` library allows you to manage your configurations for different environments easily. " +
+							"You can have separate files for `development`, `test`, `staging`, `production` etc. environments without writing special logic for that. " +
+							"It works with any files and extensions (`.env` files, or `*.js` sources, or `*.json` configs etc.)",
+						image: `${baseUrl}img/undraw_deployment_environments.svg`,
 						imageAlign: "right",
-						title: "Randomly Generated Theme Colors"
-					}
-				]}
-			</Block>
-		);
-
-		const Features = () => (
-			<Block layout="fourColumn">
-				{[
-					{
-						content: "This is the content of my feature",
-						image: `${baseUrl}img/undraw_react.svg`,
-						imageAlign: "top",
-						title: "Feature One"
-					},
-					{
-						content: "The content of my second feature",
-						image: `${baseUrl}img/undraw_operating_system.svg`,
-						imageAlign: "top",
-						title: "Feature Two"
+						title: "Set up your JS/Node project for different environments"
 					}
 				]}
 			</Block>
@@ -157,11 +144,10 @@ class Index extends React.Component {
 			<div>
 				<HomeSplash siteConfig={siteConfig} language={language} />
 				<div className="mainContainer">
-					<Features />
-					<FeatureCallout />
-					<LearnHow />
-					<TryOut />
-					<Description />
+					<DeploymentEnvironmentsSection />
+					<LocalEnvironmentsSection />
+					<SimplePowerfulSection />
+					<PromoSectionWitButtons docUrl={docUrl} {...this.props} />
 				</div>
 			</div>
 		);
