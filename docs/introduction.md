@@ -4,26 +4,67 @@ title: Introduction
 sidebar_label: Introduction
 ---
 
-Check the [documentation](https://docusaurus.io) for how to use Docusaurus.
+`resolve-node-configs-hierarchy` solves an usual for Node/JavaScript projects problem of setting up environments with some configuration options.
 
-## Lorem
+When we are talking about environments, we mean the following:
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus elementum massa eget nulla aliquet sagittis. Proin odio tortor, vulputate ut odio in, ultrices ultricies augue. Cras ornare ultrices lorem malesuada iaculis. Etiam sit amet libero tempor, pulvinar mauris sed, sollicitudin sapien.
+- Environment to run your script/project in. In Node scripts/projects we are talking about `process.env.NODE_ENV`. For example, it could be `development`, `production`, `test`, `staging` or some other custom environments.
+- Environment with settings determined in version control system and shared between all developers, and local environment specifical for this particular developer (usually this local environment can't be shared because of it will break someone else's environment or may contain some private data or information like API keys etc.). In some cases `staging` or `production` environment can be set up with some local configuration to prevent sharing private data across development team.
 
-## Mauris In Code
+## Resolving configurations
+
+`resolve-node-configs-hierarchy` uses [the following principle of resolving configuration files](https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use):
+
+It will list the following files, starting from the bottom (we use base `.env` file as example here). The first value set (or those already defined in the environment) take precedence:
+
+- `.env` - The Original®
+- `.env.development`, `.env.test`, `.env.production` are environment-specific settings.
+- `.env.local` are local overrides. This file is loaded for all environments except `test` (in `resolve-node-configs-hierarchy` API you can include it with flag if needed).
+- `.env.development.local`, `.env.test.local` (for `test` environment you can include it with flag as the second parameter; pretending tests should run the same for everybody), `.env.production.local` are local overrides of environment-specific settings.
+
+As we mentioned above, for test environment it will not list `.env.local` and `.env.test.local` from this list by default since normally you expect tests to produce the same results for everyone. You can include them by passing the second parameter with `true` value (see [API reference](api.md)).
+
+So if our environment is `production` and we have the following files `.env`, `.env.development`, `.env.production`, `.env.local`, `.env.development.local`, `.env.production.local`, the final precedence list will be the following:
+
+- `.env.production.local`
+- `.env.local`
+- `.env.production`
+- `.env`
+
+It allows us to override base configs with local ones.
+
+## File extensions
+
+`resolve-node-configs-hierarchy` allows to use files with extensions. For example, if we want to use some configuration file in JSON format, it works the following way.
+
+Let we have our base `settings.json` and we need to set up our `development` environment with some local settings.
 
 ```
-Mauris vestibulum ullamcorper nibh, ut semper purus pulvinar ut. Donec volutpat orci sit amet mauris malesuada, non pulvinar augue aliquam. Vestibulum ultricies at urna ut suscipit. Morbi iaculis, erat at imperdiet semper, ipsum nulla sodales erat, eget tincidunt justo dui quis justo. Pellentesque dictum bibendum diam at aliquet. Sed pulvinar, dolor quis finibus ornare, eros odio facilisis erat, eu rhoncus nunc dui sed ex. Nunc gravida dui massa, sed ornare arcu tincidunt sit amet. Maecenas efficitur sapien neque, a laoreet libero feugiat ut.
+root
+ │
+ ├ settings.json
+ ├ settings.development.json
+ ├ settings.production.json
+ ├ settings.local.json
+ ├ settings.development.local.json
+ └ settings.production.local.json
 ```
 
-## Nulla
+The final precedence list for looking up of `settings.json` with `resolve-node-configs-hierarchy` methods will be the following:
 
-Nulla facilisi. Maecenas sodales nec purus eget posuere. Sed sapien quam, pretium a risus in, porttitor dapibus erat. Sed sit amet fringilla ipsum, eget iaculis augue. Integer sollicitudin tortor quis ultricies aliquam. Suspendisse fringilla nunc in tellus cursus, at placerat tellus scelerisque. Sed tempus elit a sollicitudin rhoncus. Nulla facilisi. Morbi nec dolor dolor. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras et aliquet lectus. Pellentesque sit amet eros nisi. Quisque ac sapien in sapien congue accumsan. Nullam in posuere ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Proin lacinia leo a nibh fringilla pharetra.
+- `settings.development.local.json`
+- `settings.local.json`
+- `settings.development.json`
+- `settings.json`
 
-## Orci
+## .gitignore
 
-Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin venenatis lectus dui, vel ultrices ante bibendum hendrerit. Aenean egestas feugiat dui id hendrerit. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur in tellus laoreet, eleifend nunc id, viverra leo. Proin vulputate non dolor vel vulputate. Curabitur pretium lobortis felis, sit amet finibus lorem suscipit ut. Sed non mollis risus. Duis sagittis, mi in euismod tincidunt, nunc mauris vestibulum urna, at euismod est elit quis erat. Phasellus accumsan vitae neque eu placerat. In elementum arcu nec tellus imperdiet, eget maximus nulla sodales. Curabitur eu sapien eget nisl sodales fermentum.
+Using this configuration scheme, make sure you add all the local files into your version control ignore list (to `.gitignore` for Git, for example).
 
-## Phasellus
+For `settings.json` sample above these files are:
 
-Phasellus pulvinar ex id commodo imperdiet. Praesent odio nibh, sollicitudin sit amet faucibus id, placerat at metus. Donec vitae eros vitae tortor hendrerit finibus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque vitae purus dolor. Duis suscipit ac nulla et finibus. Phasellus ac sem sed dui dictum gravida. Phasellus eleifend vestibulum facilisis. Integer pharetra nec enim vitae mattis. Duis auctor, lectus quis condimentum bibendum, nunc dolor aliquam massa, id bibendum orci velit quis magna. Ut volutpat nulla nunc, sed interdum magna condimentum non. Sed urna metus, scelerisque vitae consectetur a, feugiat quis magna. Donec dignissim ornare nisl, eget tempor risus malesuada quis.
+```
+settings.development.local.json
+settings.production.local.json
+settings.local.json
+```
