@@ -31,9 +31,8 @@ const PromoSection = props => (
 
 const PromoSectionWitButtons = props => (
 	<PromoSection {...props}>
-		<Button href="#try">Try It Out</Button>
-		<Button href={props.docUrl("doc1.html")}>Example Link</Button>
-		<Button href={props.docUrl("doc2.html")}>Example Link 2</Button>
+		<Button href={props.docUrl("introduction.html")}>Getting Started</Button>
+		<Button href={props.docUrl("api.html")}>API Reference</Button>
 	</PromoSection>
 );
 

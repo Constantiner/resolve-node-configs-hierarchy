@@ -1,6 +1,7 @@
 ---
-id: doc2
-title: document number 2
+id: code-samples
+title: Code Samples
+sidebar_label: Code Samples
 ---
 
 This is a link to [another document.](doc3.md)  
