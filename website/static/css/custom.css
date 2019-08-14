@@ -18,3 +18,7 @@
 .mainContainer .promoSection {
 	padding-top: 40px;
 }
+
+.copyright .secondary {
+	font-size: 70%;
+}

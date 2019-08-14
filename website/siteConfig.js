@@ -32,8 +32,8 @@ const siteConfig = {
   ],
 
   /* path to images for header/footer */
-  headerIcon: 'img/favicon.ico',
-  footerIcon: 'img/favicon.ico',
+  headerIcon: 'img/resolve-node-configs-hierarchy-32.png',
+  footerIcon: 'img/resolve-node-configs-hierarchy-64.png',
   favicon: 'img/favicon.ico',
 
   /* Colors for website */
