@@ -74,6 +74,14 @@ class Footer extends React.Component {
 				<section className="copyright">{this.props.config.copyright}</section>
 				<section className="copyright">
 					<div className="secondary">
+						Illustrations made by{" "}
+						<a href="https://undraw.co/" title="unDraw">
+							unDraw
+						</a>
+					</div>
+				</section>
+				<section className="copyright">
+					<div className="secondary">
 						Library icons made by{" "}
 						<a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">
 							Pixel perfect
