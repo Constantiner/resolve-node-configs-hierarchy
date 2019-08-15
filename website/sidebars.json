@@ -1,6 +1,6 @@
 {
   "docs": {
-    "Getting Started": ["introduction", "installation"],
+    "Getting Started": ["introduction", "installation", "CHANGELOG"],
     "API": ["api", "code-samples"]
   }
 }

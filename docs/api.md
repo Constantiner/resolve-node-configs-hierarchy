@@ -4,5 +4,18 @@ title: API Reference
 sidebar_label: API Reference
 ---
 
-This is a link to [another document.](doc3.md)  
-This is a link to an [external page.](http://www.example.com)
+Depending on your needs you can choose synchronous or asynchronous style methods.
+
+## Synchronous API
+
+### getConfigFilesSync
+
+
+
+### getConfigFileSync
+
+## Asynchronous API
+
+### getConfigFiles
+
+### getConfigFile

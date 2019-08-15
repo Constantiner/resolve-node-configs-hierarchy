@@ -9,6 +9,10 @@
         "title": "API Reference",
         "sidebar_label": "API Reference"
       },
+      "CHANGELOG": {
+        "title": "Changelog",
+        "sidebar_label": "Changelog"
+      },
       "code-samples": {
         "title": "Code Samples",
         "sidebar_label": "Code Samples"

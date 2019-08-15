@@ -114,7 +114,8 @@ class Index extends React.Component {
 				{[
 					{
 						content:
-							"`resolve-node-configs-hierarchy` library is very simple and yet powerful. It takes almost no time to learn it.",
+							"`resolve-node-configs-hierarchy` library is very simple and yet powerful. " + 
+							"It takes almost no time to learn it. And it doesn't install any runtime dependencies.",
 						image: `${baseUrl}img/undraw_simple_powerful_api.svg`,
 						imageAlign: "right",
 						title: "Very simple synchronous and asynchronous API"

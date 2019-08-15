@@ -21,7 +21,7 @@ So the library allows to manage configurations for any environment and the same 
 
 ## Changelog
 
-Versions [changelog](CHANGELOG.md).
+Versions [changelog](docs/CHANGELOG.md).
 
 ## Documentation
 
