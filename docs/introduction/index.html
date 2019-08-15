@@ -1,0 +1,107 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Introduction · resolve-node-configs-hierarchy</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="`resolve-node-configs-hierarchy` solves an usual for Node/JavaScript projects problem of setting up environments with some individual configuration options."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Introduction · resolve-node-configs-hierarchy"/><meta property="og:type" content="website"/><meta property="og:url" content="http://constantiner.github.io/resolve-node-configs-hierarchy/"/><meta property="og:description" content="`resolve-node-configs-hierarchy` solves an usual for Node/JavaScript projects problem of setting up environments with some individual configuration options."/><meta property="og:image" content="http://constantiner.github.io/resolve-node-configs-hierarchy/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="http://constantiner.github.io/resolve-node-configs-hierarchy/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="/resolve-node-configs-hierarchy/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/resolve-node-configs-hierarchy/js/scrollSpy.js"></script><link rel="stylesheet" href="/resolve-node-configs-hierarchy/css/main.css"/><script src="/resolve-node-configs-hierarchy/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/resolve-node-configs-hierarchy/"><img class="logo" src="/resolve-node-configs-hierarchy/img/resolve-node-configs-hierarchy-32.png" alt="resolve-node-configs-hierarchy"/><h2 class="headerTitleWithLogo">resolve-node-configs-hierarchy</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive siteNavItemActive"><a href="/resolve-node-configs-hierarchy/docs/introduction" target="_self">Docs</a></li><li class="siteNavGroupActive"><a href="/resolve-node-configs-hierarchy/docs/api" target="_self">API</a></li><li class=""><a href="/resolve-node-configs-hierarchy/help" target="_self">Help</a></li><li class=""><a href="https://github.com/Constantiner/resolve-node-configs-hierarchy" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Getting Started</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Getting Started</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/resolve-node-configs-hierarchy/docs/introduction">Introduction</a></li><li class="navListItem"><a class="navItem" href="/resolve-node-configs-hierarchy/docs/installation">Installation</a></li><li class="navListItem"><a class="navItem" href="/resolve-node-configs-hierarchy/docs/CHANGELOG">Changelog</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">API</h3><ul class=""><li class="navListItem"><a class="navItem" href="/resolve-node-configs-hierarchy/docs/api">API Reference</a></li><li class="navListItem"><a class="navItem" href="/resolve-node-configs-hierarchy/docs/code-samples">Code Samples</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Introduction</h1></header><article><div><span><p><code>resolve-node-configs-hierarchy</code> solves an usual for Node/JavaScript projects problem of setting up environments with some individual configuration options.</p>
+<p>When we are talking about environments, we mean the following:</p>
+<ul>
+<li>Environment to run your script/project in. In Node scripts/projects we are talking about <code>process.env.NODE_ENV</code>. For example, it could be <code>development</code>, <code>production</code>, <code>test</code>, <code>staging</code> or some other custom environments.</li>
+<li>Environment with settings stored in version control system and shared between all developers, and local environment specific for this particular developer (usually this local environment can't be shared because of it will break someone elses environment or may contain some sensitive data or information like API keys etc.). In some cases it requires to set up <code>staging</code> or <code>production</code> environments with some local configuration to prevent sharing private data across development team.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="resolving-configurations"></a><a href="#resolving-configurations" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Resolving configurations</h2>
+<p><code>resolve-node-configs-hierarchy</code> uses <a href="https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use">the following principle of resolving configuration files</a>:</p>
+<p>It will list the following files, starting from the bottom (we use base <code>.env</code> file as example here). The first value set (or those already defined in the environment) take precedence:</p>
+<ul>
+<li><code>.env</code> is The Original®</li>
+<li><code>.env.development</code>, <code>.env.test</code>, <code>.env.production</code> are environment-specific settings.</li>
+<li><code>.env.local</code> are local overrides. This file is loaded for all environments except <code>test</code> (in <code>resolve-node-configs-hierarchy</code> API you can include it with flag if needed).</li>
+<li><code>.env.development.local</code>, <code>.env.test.local</code> (for <code>test</code> environment you can include it with flag as the second parameter; pretending tests should run the same for everybody), <code>.env.production.local</code> are local overrides of environment-specific settings.</li>
+</ul>
+<p>As we mentioned above, for test environment it will not list <code>.env.local</code> and <code>.env.test.local</code> from this list by default since normally you expect tests to produce the same results for everyone. You can include them by passing the second parameter with <code>true</code> value (see <a href="/resolve-node-configs-hierarchy/docs/api">API reference</a>).</p>
+<p>So if our environment is <code>production</code> and we have the following files <code>.env</code>, <code>.env.development</code>, <code>.env.production</code>, <code>.env.local</code>, <code>.env.development.local</code>, <code>.env.production.local</code>, the final precedence list will be the following:</p>
+<ul>
+<li><code>.env.production.local</code> (highest priority)</li>
+<li><code>.env.local</code></li>
+<li><code>.env.production</code></li>
+<li><code>.env</code> (lowest priority)</li>
+</ul>
+<p>It allows us to override base configs (like <code>.env</code> in the example above) with local ones (like <code>.env.production.local</code>).</p>
+<h2><a class="anchor" aria-hidden="true" id="file-extensions"></a><a href="#file-extensions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>File extensions</h2>
+<p><code>resolve-node-configs-hierarchy</code> allows to use files with extensions. For example, if we want to use some configuration file in JSON format, it works the following way.</p>
+<p>Let we have our base <code>settings.json</code> and we need to set up our <code>development</code> environment with some local settings. Imagine, we have the following files in our project structure:</p>
+<pre><code class="hljs">project_root
+ │
+ ├ settings<span class="hljs-selector-class">.json</span>
+ ├ settings<span class="hljs-selector-class">.development</span><span class="hljs-selector-class">.json</span>
+ ├ settings<span class="hljs-selector-class">.production</span><span class="hljs-selector-class">.json</span>
+ ├ settings<span class="hljs-selector-class">.local</span><span class="hljs-selector-class">.json</span>
+ ├ settings<span class="hljs-selector-class">.development</span><span class="hljs-selector-class">.local</span><span class="hljs-selector-class">.json</span>
+ └ settings<span class="hljs-selector-class">.production</span><span class="hljs-selector-class">.local</span><span class="hljs-selector-class">.json</span>
+</code></pre>
+<p>The final precedence list for looking up of <code>settings.json</code> with <code>resolve-node-configs-hierarchy</code> methods will be the following:</p>
+<ul>
+<li><code>settings.development.local.json</code> (highest priority)</li>
+<li><code>settings.local.json</code></li>
+<li><code>settings.development.json</code></li>
+<li><code>settings.json</code> (lowest priority)</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="gitignore"></a><a href="#gitignore" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>.gitignore</h2>
+<p>Using this configuration scheme, make sure you add all the local files into your version control ignore list (to <code>.gitignore</code> for Git, for example).</p>
+<p>For <code>settings.json</code> sample above, these files are:</p>
+<pre><code class="hljs">settings<span class="hljs-selector-class">.development</span><span class="hljs-selector-class">.local</span><span class="hljs-selector-class">.json</span>
+settings<span class="hljs-selector-class">.production</span><span class="hljs-selector-class">.local</span><span class="hljs-selector-class">.json</span>
+settings<span class="hljs-selector-class">.local</span><span class="hljs-selector-class">.json</span>
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-next button" href="/resolve-node-configs-hierarchy/docs/installation"><span>Installation</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#resolving-configurations">Resolving configurations</a></li><li><a href="#file-extensions">File extensions</a></li><li><a href="#gitignore">.gitignore</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/resolve-node-configs-hierarchy/" class="nav-home"><img src="/resolve-node-configs-hierarchy/img/resolve-node-configs-hierarchy-64.png" alt="resolve-node-configs-hierarchy" width="66" height="58"/></a><div><h5>Docs</h5><a href="/resolve-node-configs-hierarchy/docs/introduction.html">Getting Started</a><a href="/resolve-node-configs-hierarchy/docs/api.html">API Reference</a><a href="/resolve-node-configs-hierarchy/docs/code-samples.html">Code Samples</a></div><div><h5>More</h5><a href="https://github.com/Constantiner/resolve-node-configs-hierarchy">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://opensource.facebook.com/" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/resolve-node-configs-hierarchy/img/oss_logo.png" alt="Facebook Open Source" width="170" height="45"/></a><section class="copyright">Copyright © 2019 Konstantin Kovalev aka Constantiner</section><section class="copyright"><div class="secondary">Illustrations made by <a href="https://undraw.co/" title="unDraw">unDraw</a></div></section><section class="copyright"><div class="secondary">Library icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div></section></footer></div></body></html>

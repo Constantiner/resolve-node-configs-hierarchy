@@ -1,0 +1,213 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>API Reference · resolve-node-configs-hierarchy</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Depending on your needs you can choose [synchronous](#synchronous-api) or [asynchronous](#asynchronous-api) methods."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="API Reference · resolve-node-configs-hierarchy"/><meta property="og:type" content="website"/><meta property="og:url" content="http://constantiner.github.io/resolve-node-configs-hierarchy/"/><meta property="og:description" content="Depending on your needs you can choose [synchronous](#synchronous-api) or [asynchronous](#asynchronous-api) methods."/><meta property="og:image" content="http://constantiner.github.io/resolve-node-configs-hierarchy/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="http://constantiner.github.io/resolve-node-configs-hierarchy/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="/resolve-node-configs-hierarchy/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/resolve-node-configs-hierarchy/js/scrollSpy.js"></script><link rel="stylesheet" href="/resolve-node-configs-hierarchy/css/main.css"/><script src="/resolve-node-configs-hierarchy/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/resolve-node-configs-hierarchy/"><img class="logo" src="/resolve-node-configs-hierarchy/img/resolve-node-configs-hierarchy-32.png" alt="resolve-node-configs-hierarchy"/><h2 class="headerTitleWithLogo">resolve-node-configs-hierarchy</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/resolve-node-configs-hierarchy/docs/introduction" target="_self">Docs</a></li><li class="siteNavGroupActive siteNavItemActive"><a href="/resolve-node-configs-hierarchy/docs/api" target="_self">API</a></li><li class=""><a href="/resolve-node-configs-hierarchy/help" target="_self">Help</a></li><li class=""><a href="https://github.com/Constantiner/resolve-node-configs-hierarchy" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>API</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Getting Started</h3><ul class=""><li class="navListItem"><a class="navItem" href="/resolve-node-configs-hierarchy/docs/introduction">Introduction</a></li><li class="navListItem"><a class="navItem" href="/resolve-node-configs-hierarchy/docs/installation">Installation</a></li><li class="navListItem"><a class="navItem" href="/resolve-node-configs-hierarchy/docs/CHANGELOG">Changelog</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">API</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/resolve-node-configs-hierarchy/docs/api">API Reference</a></li><li class="navListItem"><a class="navItem" href="/resolve-node-configs-hierarchy/docs/code-samples">Code Samples</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">API Reference</h1></header><article><div><span><p>Depending on your needs you can choose <a href="#synchronous-api">synchronous</a> or <a href="#asynchronous-api">asynchronous</a> methods.</p>
+<h2><a class="anchor" aria-hidden="true" id="synchronous-api"></a><a href="#synchronous-api" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Synchronous API</h2>
+<h3><a class="anchor" aria-hidden="true" id="getconfigfilessync"></a><a href="#getconfigfilessync" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>getConfigFilesSync</h3>
+<p>Returns a list of absolute file paths of existing files in order of precedence. Doesn't work in browser environment.</p>
+<p>For example, if we have the following file structure:</p>
+<pre><code class="hljs">project_root
+ │
+ └ configuration
+    │
+    ├ settings<span class="hljs-selector-class">.json</span>
+    ├ settings<span class="hljs-selector-class">.development</span><span class="hljs-selector-class">.json</span>
+    ├ settings<span class="hljs-selector-class">.production</span><span class="hljs-selector-class">.json</span>
+    ├ settings<span class="hljs-selector-class">.local</span><span class="hljs-selector-class">.json</span>
+    ├ settings<span class="hljs-selector-class">.development</span><span class="hljs-selector-class">.local</span><span class="hljs-selector-class">.json</span>
+    └ settings<span class="hljs-selector-class">.production</span><span class="hljs-selector-class">.local</span><span class="hljs-selector-class">.json</span>
+</code></pre>
+<p>And call <code>getConfigFilesSync</code> like the following in <code>development</code> environment:</p>
+<pre><code class="hljs css language-JavaScript">getConfigFilesSync(<span class="hljs-string">"configuration/settings.json"</span>);
+</code></pre>
+<p>It will return the following array:</p>
+<pre><code class="hljs css language-JavaScript">[<span class="hljs-string">"&lt;project_root_absolute_path&gt;/configuration/settings.development.local.json"</span>, <span class="hljs-string">"&lt;project_root_absolute_path&gt;/configuration/settings.local.json"</span>, <span class="hljs-string">"&lt;project_root_absolute_path&gt;/configuration/settings.development.json"</span>, <span class="hljs-string">"&lt;project_root_absolute_path&gt;/configuration/settings.json"</span>]
+</code></pre>
+<p>It will return an empty array if there is no relevant files.</p>
+<p><strong>Note:</strong> it checks files existence and doesn't include inexistent files!</p>
+<p>Signature is the following:</p>
+<pre><code class="hljs css language-TypeScript"><span class="hljs-keyword">declare</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getConfigFilesSync</span>(<span class="hljs-params">file: <span class="hljs-built_in">string</span>, includeTestLocals?: <span class="hljs-built_in">boolean</span></span>): <span class="hljs-title">string</span>[]</span>;
+</code></pre>
+<p>Parameters:</p>
+<ul>
+<li><code>file</code>: <code>string</code> — is base file path (related to <a href="https://nodejs.org/api/process.html#process_process_cwd"><code>process.cwd()</code></a>).</li>
+<li><code>includeTestLocals</code>: <code>boolean</code> (optional, default is <code>false</code>) — if <code>true</code> it will include <code>local</code> files for <code>test</code> environment (ignores them by default). So, if you pass <code>true</code> it will work absolutely the same way for ant environment. See explanation about <code>test</code> environment in <a href="/resolve-node-configs-hierarchy/docs/introduction#resolving-configurations">introduction section</a>.</li>
+</ul>
+<p>Returns:</p>
+<p><code>string[]</code> — an array of existing absolute file paths in order of precedence.</p>
+<p>To import it with SystemJS:</p>
+<pre><code class="hljs css language-JavaScript"><span class="hljs-keyword">const</span> getConfigFilesSync = <span class="hljs-built_in">require</span>(<span class="hljs-string">"@constantiner/resolve-node-configs-hierarchy"</span>).getConfigFilesSync;
+</code></pre>
+<p>or with ES6 modules:</p>
+<pre><code class="hljs css language-JavaScript"><span class="hljs-keyword">import</span> { getConfigFilesSync } <span class="hljs-keyword">from</span> <span class="hljs-string">"@constantiner/resolve-node-configs-hierarchy"</span>;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="getconfigfilesync"></a><a href="#getconfigfilesync" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>getConfigFileSync</h3>
+<p>Returns absolute file path of the most precedent existing file in files hierarchy.</p>
+<p>For example, if we have the following file structure:</p>
+<pre><code class="hljs">project_root
+ │
+ └ configuration
+    │
+    ├ settings<span class="hljs-selector-class">.json</span>
+    ├ settings<span class="hljs-selector-class">.development</span><span class="hljs-selector-class">.json</span>
+    ├ settings<span class="hljs-selector-class">.production</span><span class="hljs-selector-class">.json</span>
+    ├ settings<span class="hljs-selector-class">.local</span><span class="hljs-selector-class">.json</span>
+    └ settings<span class="hljs-selector-class">.production</span><span class="hljs-selector-class">.local</span><span class="hljs-selector-class">.json</span>
+</code></pre>
+<p>And call <code>getConfigFileSync</code> like the following in <code>development</code> environment:</p>
+<pre><code class="hljs css language-JavaScript">getConfigFileSync(<span class="hljs-string">"configuration/settings.json"</span>);
+</code></pre>
+<p>It will return the following string:</p>
+<pre><code class="hljs css language-JavaScript"><span class="hljs-string">"&lt;project_root_absolute_path&gt;/configuration/settings.local.json"</span>
+</code></pre>
+<p>It will return <code>null</code> if there is no relevant files.</p>
+<p><strong>Note:</strong> it checks files existence and doesn't include inexistent files!</p>
+<p>Signature is the following:</p>
+<pre><code class="hljs css language-TypeScript"><span class="hljs-keyword">declare</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getConfigFileSync</span>(<span class="hljs-params">file: <span class="hljs-built_in">string</span>, includeTestLocals?: <span class="hljs-built_in">boolean</span></span>): <span class="hljs-title">string</span> | <span class="hljs-title">null</span></span>;
+</code></pre>
+<p>Parameters:</p>
+<ul>
+<li><code>file</code>: <code>string</code> — is base file path (related to <a href="https://nodejs.org/api/process.html#process_process_cwd"><code>process.cwd()</code></a>).</li>
+<li><code>includeTestLocals</code>: <code>boolean</code> (optional, default is <code>false</code>) — if <code>true</code> it will include <code>local</code> files for <code>test</code> environment (ignores them by default). So, if you pass <code>true</code> it will work absolutely the same way for ant environment. See explanation about <code>test</code> environment in <a href="/resolve-node-configs-hierarchy/docs/introduction#resolving-configurations">introduction section</a>.</li>
+</ul>
+<p>Returns either:</p>
+<ul>
+<li><code>string</code> — the most precedent existing file in files hierarchy. It is the first element of array, returned from <a href="#getconfigfilessync"><code>getConfigFilesSync</code> method</a> (if the array is not empty).</li>
+<li><code>null</code> if there are no existing files.</li>
+</ul>
+<p>To import it with SystemJS:</p>
+<pre><code class="hljs css language-JavaScript"><span class="hljs-keyword">const</span> getConfigFileSync = <span class="hljs-built_in">require</span>(<span class="hljs-string">"@constantiner/resolve-node-configs-hierarchy"</span>).getConfigFileSync;
+</code></pre>
+<p>or with ES6 modules:</p>
+<pre><code class="hljs css language-JavaScript"><span class="hljs-keyword">import</span> { getConfigFileSync } <span class="hljs-keyword">from</span> <span class="hljs-string">"@constantiner/resolve-node-configs-hierarchy"</span>;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="asynchronous-api"></a><a href="#asynchronous-api" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Asynchronous API</h2>
+<h3><a class="anchor" aria-hidden="true" id="getconfigfiles"></a><a href="#getconfigfiles" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>getConfigFiles</h3>
+<p>Returns a promise resolving to a list of absolute file paths of existing files in order of precedence. Doesn't work in browser environment.</p>
+<p>For example, if we have the following file structure:</p>
+<pre><code class="hljs">project_root
+ │
+ └ configuration
+    │
+    ├ settings<span class="hljs-selector-class">.json</span>
+    ├ settings<span class="hljs-selector-class">.development</span><span class="hljs-selector-class">.json</span>
+    ├ settings<span class="hljs-selector-class">.production</span><span class="hljs-selector-class">.json</span>
+    ├ settings<span class="hljs-selector-class">.local</span><span class="hljs-selector-class">.json</span>
+    ├ settings<span class="hljs-selector-class">.development</span><span class="hljs-selector-class">.local</span><span class="hljs-selector-class">.json</span>
+    └ settings<span class="hljs-selector-class">.production</span><span class="hljs-selector-class">.local</span><span class="hljs-selector-class">.json</span>
+</code></pre>
+<p>And call <code>getConfigFiles</code> like the following in <code>development</code> environment:</p>
+<pre><code class="hljs css language-JavaScript">getConfigFiles(<span class="hljs-string">"configuration/settings.json"</span>).then(<span class="hljs-function"><span class="hljs-params">files</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(files));
+</code></pre>
+<p>It will print in console the following array:</p>
+<pre><code class="hljs css language-JavaScript">[<span class="hljs-string">"&lt;project_root_absolute_path&gt;/configuration/settings.development.local.json"</span>, <span class="hljs-string">"&lt;project_root_absolute_path&gt;/configuration/settings.local.json"</span>, <span class="hljs-string">"&lt;project_root_absolute_path&gt;/configuration/settings.development.json"</span>, <span class="hljs-string">"&lt;project_root_absolute_path&gt;/configuration/settings.json"</span>]
+</code></pre>
+<p>Returning promise will resolve to an empty array if there is no relevant files.</p>
+<p><strong>Note:</strong> it checks files existence and doesn't include inexistent files!</p>
+<p>Signature is the following:</p>
+<pre><code class="hljs css language-TypeScript"><span class="hljs-keyword">declare</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getConfigFiles</span>(<span class="hljs-params">file: <span class="hljs-built_in">string</span>, includeTestLocals?: <span class="hljs-built_in">boolean</span></span>): <span class="hljs-title">Promise</span>&lt;<span class="hljs-title">string</span>[]&gt;</span>;
+</code></pre>
+<p>Parameters:</p>
+<ul>
+<li><code>file</code>: <code>string</code> — is base file path (related to <a href="https://nodejs.org/api/process.html#process_process_cwd"><code>process.cwd()</code></a>).</li>
+<li><code>includeTestLocals</code>: <code>boolean</code> (optional, default is <code>false</code>) — if <code>true</code> it will include <code>local</code> files for <code>test</code> environment (ignores them by default). So, if you pass <code>true</code> it will work absolutely the same way for ant environment. See explanation about <code>test</code> environment in <a href="/resolve-node-configs-hierarchy/docs/introduction#resolving-configurations">introduction section</a>.</li>
+</ul>
+<p>Returns:</p>
+<p><code>Promise&lt;string[]&gt;</code> — a promise resolving to an array of existing absolute file paths in order of precedence.</p>
+<p>To import it with SystemJS:</p>
+<pre><code class="hljs css language-JavaScript"><span class="hljs-keyword">const</span> getConfigFiles = <span class="hljs-built_in">require</span>(<span class="hljs-string">"@constantiner/resolve-node-configs-hierarchy"</span>).getConfigFiles;
+</code></pre>
+<p>or with ES6 modules:</p>
+<pre><code class="hljs css language-JavaScript"><span class="hljs-keyword">import</span> { getConfigFiles } <span class="hljs-keyword">from</span> <span class="hljs-string">"@constantiner/resolve-node-configs-hierarchy"</span>;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="getconfigfile"></a><a href="#getconfigfile" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>getConfigFile</h3>
+<p>Returns a promise resolving to absolute file path of the most precedent existing file in files hierarchy.</p>
+<p>For example, if we have the following file structure:</p>
+<pre><code class="hljs">project_root
+ │
+ └ configuration
+    │
+    ├ settings<span class="hljs-selector-class">.json</span>
+    ├ settings<span class="hljs-selector-class">.development</span><span class="hljs-selector-class">.json</span>
+    ├ settings<span class="hljs-selector-class">.production</span><span class="hljs-selector-class">.json</span>
+    ├ settings<span class="hljs-selector-class">.local</span><span class="hljs-selector-class">.json</span>
+    └ settings<span class="hljs-selector-class">.production</span><span class="hljs-selector-class">.local</span><span class="hljs-selector-class">.json</span>
+</code></pre>
+<p>And call <code>getConfigFile</code> like the following in <code>development</code> environment:</p>
+<pre><code class="hljs css language-JavaScript">getConfigFile(<span class="hljs-string">"configuration/settings.json"</span>).then(<span class="hljs-function"><span class="hljs-params">file</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(file));
+</code></pre>
+<p>It will print to console the following string:</p>
+<pre><code class="hljs css language-JavaScript"><span class="hljs-string">"&lt;project_root_absolute_path&gt;/configuration/settings.local.json"</span>
+</code></pre>
+<p>Resulting promise will resolve to <code>null</code> if there is no relevant files.</p>
+<p><strong>Note:</strong> it checks files existence and doesn't include inexistent files!</p>
+<p>Signature is the following:</p>
+<pre><code class="hljs css language-TypeScript"><span class="hljs-keyword">declare</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getConfigFile</span>(<span class="hljs-params">file: <span class="hljs-built_in">string</span>, includeTestLocals?: <span class="hljs-built_in">boolean</span></span>): <span class="hljs-title">Promise</span>&lt;<span class="hljs-title">string</span> | <span class="hljs-title">null</span>&gt;</span>;
+</code></pre>
+<p>Parameters:</p>
+<ul>
+<li><code>file</code>: <code>string</code> — is base file path (related to <a href="https://nodejs.org/api/process.html#process_process_cwd"><code>process.cwd()</code></a>).</li>
+<li><code>includeTestLocals</code>: <code>boolean</code> (optional, default is <code>false</code>) — if <code>true</code> it will include <code>local</code> files for <code>test</code> environment (ignores them by default). So, if you pass <code>true</code> it will work absolutely the same way for ant environment. See explanation about <code>test</code> environment in <a href="/resolve-node-configs-hierarchy/docs/introduction#resolving-configurations">introduction section</a>.</li>
+</ul>
+<p>Returns:</p>
+<p><code>Promise&lt;string | null&gt;</code> — a promise resolving to the most precedent existing file in files hierarchy. It is the first element of array, returned from <a href="#getconfigfiles"><code>getConfigFiles</code> method</a> (if the array is not empty). In case of empty array (files don't exist) the resulting promise will resolve to <code>null</code>.</p>
+<p>To import it with SystemJS:</p>
+<pre><code class="hljs css language-JavaScript"><span class="hljs-keyword">const</span> getConfigFile = <span class="hljs-built_in">require</span>(<span class="hljs-string">"@constantiner/resolve-node-configs-hierarchy"</span>).getConfigFile;
+</code></pre>
+<p>or with ES6 modules:</p>
+<pre><code class="hljs css language-JavaScript"><span class="hljs-keyword">import</span> { getConfigFile } <span class="hljs-keyword">from</span> <span class="hljs-string">"@constantiner/resolve-node-configs-hierarchy"</span>;
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/resolve-node-configs-hierarchy/docs/CHANGELOG"><span class="arrow-prev">← </span><span>Changelog</span></a><a class="docs-next button" href="/resolve-node-configs-hierarchy/docs/code-samples"><span>Code Samples</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#synchronous-api">Synchronous API</a><ul class="toc-headings"><li><a href="#getconfigfilessync">getConfigFilesSync</a></li><li><a href="#getconfigfilesync">getConfigFileSync</a></li></ul></li><li><a href="#asynchronous-api">Asynchronous API</a><ul class="toc-headings"><li><a href="#getconfigfiles">getConfigFiles</a></li><li><a href="#getconfigfile">getConfigFile</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/resolve-node-configs-hierarchy/" class="nav-home"><img src="/resolve-node-configs-hierarchy/img/resolve-node-configs-hierarchy-64.png" alt="resolve-node-configs-hierarchy" width="66" height="58"/></a><div><h5>Docs</h5><a href="/resolve-node-configs-hierarchy/docs/introduction.html">Getting Started</a><a href="/resolve-node-configs-hierarchy/docs/api.html">API Reference</a><a href="/resolve-node-configs-hierarchy/docs/code-samples.html">Code Samples</a></div><div><h5>More</h5><a href="https://github.com/Constantiner/resolve-node-configs-hierarchy">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://opensource.facebook.com/" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/resolve-node-configs-hierarchy/img/oss_logo.png" alt="Facebook Open Source" width="170" height="45"/></a><section class="copyright">Copyright © 2019 Konstantin Kovalev aka Constantiner</section><section class="copyright"><div class="secondary">Illustrations made by <a href="https://undraw.co/" title="unDraw">unDraw</a></div></section><section class="copyright"><div class="secondary">Library icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div></section></footer></div></body></html>
