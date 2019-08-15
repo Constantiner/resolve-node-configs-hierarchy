@@ -66,6 +66,8 @@ typings/
 # VS Code
 .vscode
 
+# docusaurus-build files
+website/build
 
 #distributive files
 dist/
