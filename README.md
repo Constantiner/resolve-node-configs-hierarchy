@@ -21,9 +21,11 @@ So the library allows to manage configurations for any environment and the same 
 
 ## Changelog
 
-Versions [changelog](CHANGELOG.md).
+Versions [changelog](docs/CHANGELOG.md).
 
 ## Documentation
+
+See the full documentation [here](https://constantiner.github.io/resolve-node-configs-hierarchy/).
 
 The utility was inspired by [create-react-app](https://github.com/facebook/create-react-app) and may contain some chunks of code from it.
 
