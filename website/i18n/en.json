@@ -3,7 +3,7 @@
   "localized-strings": {
     "next": "Next",
     "previous": "Previous",
-    "tagline": "Fights configuration headaches for JavaScript/Node projects in different environments without pain",
+    "tagline": "Fight configuration headaches for different environments without pain",
     "docs": {
       "api": {
         "title": "API Reference",
@@ -25,7 +25,8 @@
     "links": {
       "Docs": "Docs",
       "API": "API",
-      "Help": "Help"
+      "Help": "Help",
+      "GitHub": "GitHub"
     },
     "categories": {
       "Getting Started": "Getting Started",

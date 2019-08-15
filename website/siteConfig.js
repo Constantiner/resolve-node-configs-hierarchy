@@ -10,7 +10,7 @@
 
 const siteConfig = {
 	title: "resolve-node-configs-hierarchy", // Title for your website.
-	tagline: "Fight configuration headaches for different environments without pain.",
+	tagline: "Fight configuration headaches for different environments without pain",
 	url: "http://constantiner.github.io", // Your website URL
 	baseUrl: "/resolve-node-configs-hierarchy/", // Base URL for your project */
 	// For github.io type URLs, you would set the url and baseUrl like:
