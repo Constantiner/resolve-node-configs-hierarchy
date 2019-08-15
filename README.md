@@ -25,6 +25,8 @@ Versions [changelog](docs/CHANGELOG.md).
 
 ## Documentation
 
+See the full documentation [here](https://constantiner.github.io/resolve-node-configs-hierarchy/).
+
 The utility was inspired by [create-react-app](https://github.com/facebook/create-react-app) and may contain some chunks of code from it.
 
 **Note** To use in Node environment, not in browser.
