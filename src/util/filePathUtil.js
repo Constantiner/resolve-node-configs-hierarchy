@@ -1,14 +1,10 @@
+import { join, parse } from "path";
+
+const formExtension = extension => (extension ? extension.substring(1) : extension);
+
 const separatePathAndExtension = path => {
-	const pathParts = path.split("/");
-	let fileName = pathParts.pop();
-	let extension = "";
-	const fileNameParts = fileName.split(".");
-	if (fileNameParts.length > 2 || (fileNameParts.length === 2 && fileNameParts[0].length > 0)) {
-		extension = fileNameParts.pop();
-		fileName = fileNameParts.join(".");
-	}
-	const resultingPath = `${pathParts.join("/")}/${fileName}`;
-	return { path: resultingPath, extension };
+	const pathObject = parse(path);
+	return { path: join(pathObject.dir, pathObject.name), extension: formExtension(pathObject.ext) };
 };
 
 export { separatePathAndExtension };
