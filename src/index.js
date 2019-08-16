@@ -1,6 +1,6 @@
 import { acompose, afilter } from "@constantiner/fun-ctional";
-import { separatePathAndExtension } from "./util/filePathUtil";
 import compose from "./util/compose";
+import { createFilePath, separatePathAndExtension } from "./util/filePathUtil";
 import { fileExists, fileExistsSync, resolvePath, resolvePathSync } from "./util/fsUtils";
 import { getEnvironment } from "./util/getEnvironment";
 
@@ -20,7 +20,7 @@ const produceHierarchicConfigsArray = (nodeEnvironment, includeTestLocals, path,
 		path
 	]
 		.filter(Boolean)
-		.map(path => (extension ? `${path}.${extension}` : path));
+		.map(createFilePath(extension));
 
 // https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use
 const getHierarchicConfigsArray = (nodeEnvironmentFunc, includeTestLocals) => ({ path, extension }) =>

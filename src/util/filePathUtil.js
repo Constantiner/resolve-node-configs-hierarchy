@@ -7,4 +7,6 @@ const separatePathAndExtension = path => {
 	return { path: join(pathObject.dir, pathObject.name), extension: formExtension(pathObject.ext) };
 };
 
-export { separatePathAndExtension };
+const createFilePath = extension => path => (extension ? `${path}.${extension}` : path);
+
+export { separatePathAndExtension, createFilePath };
