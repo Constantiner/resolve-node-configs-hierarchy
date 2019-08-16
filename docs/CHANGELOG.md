@@ -4,19 +4,27 @@ title: Changelog
 sidebar_label: Changelog
 ---
 
-## [v0.4.1](https://github.com/Constantiner/resolve-node-configs-hierarchy/tree/v0.4.1) (2019-08-15)
+## [v0.4.2](https://github.com/Constantiner/resolve-node-configs-hierarchy/tree/v0.4.2) (2019-08-16)
 
-[Full Changelog](https://github.com/Constantiner/resolve-node-configs-hierarchy/compare/v0.4.1...v0.4.1)
+[Full Changelog](https://github.com/Constantiner/resolve-node-configs-hierarchy/compare/v0.4.1...v0.4.2)
 
 **Implemented enhancements:**
 
+- Make tests for case when file name ends with dot \(.\) [\#53](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/53)
+- Use path.format\(\) for making paths [\#52](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/52)
+- Use path.parse\(path\) for parsing filenames [\#51](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/51)
 - Include actual current year into license text [\#44](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/44)
 - Use dockerized Github Changelog Generator [\#43](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/43)
+- Add good documentation [\#24](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/24)
 - Include d.ts type def files in build [\#23](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/23)
 - Add more precise types with JSDoc [\#22](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/22)
 
 **Merged pull requests:**
 
+- Make tests for case when file name ends with dot \(.\) [\#57](https://github.com/Constantiner/resolve-node-configs-hierarchy/pull/57)
+- Use path.format\(\) for making paths [\#56](https://github.com/Constantiner/resolve-node-configs-hierarchy/pull/56)
+- Use path.parse\(path\) for parsing filenames [\#55](https://github.com/Constantiner/resolve-node-configs-hierarchy/pull/55)
+- Add good documentation [\#54](https://github.com/Constantiner/resolve-node-configs-hierarchy/pull/54)
 - Include d.ts type def files in build [\#49](https://github.com/Constantiner/resolve-node-configs-hierarchy/pull/49)
 - Add more precise types with JSDoc [\#48](https://github.com/Constantiner/resolve-node-configs-hierarchy/pull/48)
 - Include actual current year into license text [\#47](https://github.com/Constantiner/resolve-node-configs-hierarchy/pull/47)
