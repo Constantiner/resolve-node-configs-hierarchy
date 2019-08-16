@@ -1,30 +1,46 @@
 import { acompose, afilter } from "@constantiner/fun-ctional";
-import { separatePathAndExtension } from "./util/filePathUtil";
+import { format, parse } from "path";
 import compose from "./util/compose";
 import { fileExists, fileExistsSync, resolvePath, resolvePathSync } from "./util/fsUtils";
 import { getEnvironment } from "./util/getEnvironment";
 
 const canIncludeLocal = (nodeEnvironment, includeTestLocals) => nodeEnvironment !== "test" || includeTestLocals;
 
-const produceHierarchicConfigsArray = (nodeEnvironment, includeTestLocals, path, extension) =>
+const produceHierarchicConfigsArray = (nodeEnvironment, includeTestLocals, { dir, name, ext }) =>
 	[
 		// Don't include `*.local.*` files for `test` environment
 		// since normally you expect tests to produce the same
 		// results for everyone
-		canIncludeLocal(nodeEnvironment, includeTestLocals) && `${path}.${nodeEnvironment}.local`,
+		canIncludeLocal(nodeEnvironment, includeTestLocals) && {
+			dir,
+			name: `${name}.${nodeEnvironment}.local`,
+			ext
+		},
 		// Don't include `*.local.*` files for `test` environment
 		// since normally you expect tests to produce the same
 		// results for everyone
-		canIncludeLocal(nodeEnvironment, includeTestLocals) && `${path}.local`,
-		`${path}.${nodeEnvironment}`,
-		path
+		canIncludeLocal(nodeEnvironment, includeTestLocals) && {
+			dir,
+			name: `${name}.local`,
+			ext
+		},
+		{
+			dir,
+			name: `${name}.${nodeEnvironment}`,
+			ext
+		},
+		{
+			dir,
+			name,
+			ext
+		}
 	]
 		.filter(Boolean)
-		.map(path => (extension ? `${path}.${extension}` : path));
+		.map(format);
 
 // https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use
-const getHierarchicConfigsArray = (nodeEnvironmentFunc, includeTestLocals) => ({ path, extension }) =>
-	produceHierarchicConfigsArray(nodeEnvironmentFunc(), includeTestLocals, path, extension);
+const getHierarchicConfigsArray = (nodeEnvironmentFunc, includeTestLocals) => pathObject =>
+	produceHierarchicConfigsArray(nodeEnvironmentFunc(), includeTestLocals, pathObject);
 
 const filterFiles = filterFunc => files => files.filter(filterFunc);
 
@@ -75,12 +91,9 @@ const filterFiles = filterFunc => files => files.filter(filterFunc);
  * @see https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use
  */
 const getConfigFiles = (file, includeTestLocals = false) =>
-	acompose(
-		afilter(fileExists),
-		getHierarchicConfigsArray(getEnvironment, includeTestLocals),
-		separatePathAndExtension,
-		resolvePath
-	)(file);
+	acompose(afilter(fileExists), getHierarchicConfigsArray(getEnvironment, includeTestLocals), parse, resolvePath)(
+		file
+	);
 
 /**
  * Returns a list of absolute file paths of existing files in the order to apply from first to last (in order of precedence).
@@ -131,7 +144,7 @@ const getConfigFilesSync = (file, includeTestLocals = false) =>
 	compose(
 		filterFiles(fileExistsSync),
 		getHierarchicConfigsArray(getEnvironment, includeTestLocals),
-		separatePathAndExtension,
+		parse,
 		resolvePathSync
 	)(file);
 

@@ -17,7 +17,9 @@
 				"whitelist": {
 					"e": true,
 					"args": true,
-					"obj": true
+					"obj": true,
+					"dir": true,
+					"ext": true
 				}
 			}
 		],
