@@ -4,7 +4,7 @@ import { readFileSync } from "fs";
 import globby from "globby";
 import validate from "sourcemap-validator";
 
-const getMapFilesList = () => globby(["**/*.map", "!node_modules"]);
+const getMapFilesList = () => globby(["**/*.map", "!node_modules", "!website"]);
 
 const validateSourcemaps = (sourceFileName, sourceMapFileName) => {
 	console.log(`Validating source map for "${sourceFileName}"…`);

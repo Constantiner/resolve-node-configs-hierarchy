@@ -2,15 +2,15 @@ src
 __tests__
 node_modules
 scripts
-.DS_Store
 package-lock.json
 coverage
+website
 .*
-gulpfile.js
 babel.config.js
 jest.config.json
 jsconfig.json
 rollup.config.js
+jsdoc.conf.json
 
 # Folder with files for integration tests
 test-files
