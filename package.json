@@ -1,6 +1,6 @@
 {
 	"name": "@constantiner/resolve-node-configs-hierarchy",
-	"version": "0.4.1",
+	"version": "0.4.2",
 	"description": "Simple library to resolve configuration files hierarchy in Node projects for producing effective configuration from them",
 	"main": "dist/index.js",
 	"module": "esm/index.js",
@@ -19,7 +19,7 @@
 		"lint-staged": "lint-staged",
 		"validate:sourcemaps": "node -r esm scripts/sourcemapsValidator.js",
 		"changelog": "node -r esm scripts/generateChangelog.js",
-		"version": "npm run changelog && git add CHANGELOG.md",
+		"version": "npm run changelog && git add docs/CHANGELOG.md",
 		"postversion": "git push && git push --tags",
 		"version:patch": "npm version patch -m \"Upgrade to %s\"",
 		"version:minor": "npm version minor -m \"Upgrade to %s\"",
