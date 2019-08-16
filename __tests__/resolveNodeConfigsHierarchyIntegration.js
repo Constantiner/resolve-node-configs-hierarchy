@@ -169,6 +169,14 @@ describe("resolve-node-configs-hierarchy integration tests", () => {
 				actualPaths
 			);
 		});
+		it("should pass for all existing with dot as ext in tests root in production", async () => {
+			expect.assertions(2);
+			configureEnvironmentMock("production");
+			configureExistingPaths(allPossibleExisting);
+			const actualPaths = await getConfigFiles(getRelativePathForTests("index."));
+			expect(actualPaths.length).toBe(4);
+			comparePathArrays(["index.production.local.", "index.local.", "index.production.", "index."], actualPaths);
+		});
 		it("should pass for all existing with ext in tests root in test", async () => {
 			expect.assertions(2);
 			configureEnvironmentMock("test");
@@ -177,6 +185,14 @@ describe("resolve-node-configs-hierarchy integration tests", () => {
 			expect(actualPaths.length).toBe(2);
 			comparePathArrays([".env.test.json", ".env.json"], actualPaths);
 		});
+		it("should pass for all existing with dot as ext in tests root in test", async () => {
+			expect.assertions(2);
+			configureEnvironmentMock("test");
+			configureExistingPaths(allPossibleExisting);
+			const actualPaths = await getConfigFiles(getRelativePathForTests("index."));
+			expect(actualPaths.length).toBe(2);
+			comparePathArrays(["index.test.", "index."], actualPaths);
+		});
 		it("should pass for all existing with ext in tests root in test with flag", async () => {
 			expect.assertions(2);
 			configureEnvironmentMock("test");
@@ -184,6 +200,14 @@ describe("resolve-node-configs-hierarchy integration tests", () => {
 			const actualPaths = await getConfigFiles(getRelativePathForTests(".env.json"), true);
 			expect(actualPaths.length).toBe(4);
 			comparePathArrays([".env.test.local.json", ".env.local.json", ".env.test.json", ".env.json"], actualPaths);
+		});
+		it("should pass for all existing with dot as ext in tests root in test with flag", async () => {
+			expect.assertions(2);
+			configureEnvironmentMock("test");
+			configureExistingPaths(allPossibleExisting);
+			const actualPaths = await getConfigFiles(getRelativePathForTests("index."), true);
+			expect(actualPaths.length).toBe(4);
+			comparePathArrays(["index.test.local.", "index.local.", "index.test.", "index."], actualPaths);
 		});
 	});
 	describe("resolve-node-configs-hierarchy getConfigFile integration tests", () => {
@@ -269,6 +293,13 @@ describe("resolve-node-configs-hierarchy integration tests", () => {
 			const actualPath = await getConfigFile(getRelativePathForTests(".env.json"));
 			expect(actualPath).toBe(getAbsoluteFromRelative(".env.production.local.json"));
 		});
+		it("should pass for all existing with dot as ext in tests root in production", async () => {
+			expect.assertions(1);
+			configureEnvironmentMock("production");
+			configureExistingPaths(allPossibleExisting);
+			const actualPath = await getConfigFile(getRelativePathForTests("index."));
+			expect(actualPath).toBe(getAbsoluteFromRelative("index.production.local."));
+		});
 		it("should pass for all existing with ext in tests root in test", async () => {
 			expect.assertions(1);
 			configureEnvironmentMock("test");
@@ -276,12 +307,26 @@ describe("resolve-node-configs-hierarchy integration tests", () => {
 			const actualPath = await getConfigFile(getRelativePathForTests(".env.json"));
 			expect(actualPath).toBe(getAbsoluteFromRelative(".env.test.json"));
 		});
+		it("should pass for all existing with dot as ext in tests root in test", async () => {
+			expect.assertions(1);
+			configureEnvironmentMock("test");
+			configureExistingPaths(allPossibleExisting);
+			const actualPath = await getConfigFile(getRelativePathForTests("index."));
+			expect(actualPath).toBe(getAbsoluteFromRelative("index.test."));
+		});
 		it("should pass for all existing with ext in tests root in test with flag", async () => {
 			expect.assertions(1);
 			configureEnvironmentMock("test");
 			configureExistingPaths(allPossibleExisting);
 			const actualPath = await getConfigFile(getRelativePathForTests(".env.json"), true);
 			expect(actualPath).toBe(getAbsoluteFromRelative(".env.test.local.json"));
+		});
+		it("should pass for all existing with dot as ext in tests root in test with flag", async () => {
+			expect.assertions(1);
+			configureEnvironmentMock("test");
+			configureExistingPaths(allPossibleExisting);
+			const actualPath = await getConfigFile(getRelativePathForTests("index."), true);
+			expect(actualPath).toBe(getAbsoluteFromRelative("index.test.local."));
 		});
 	});
 	describe("resolve-node-configs-hierarchy getConfigFilesSync integration tests", () => {
@@ -369,6 +414,13 @@ describe("resolve-node-configs-hierarchy integration tests", () => {
 				actualPaths
 			);
 		});
+		it("should pass for all existing with dot as ext in tests root in production", () => {
+			configureEnvironmentMock("production");
+			configureExistingPaths(allPossibleExisting);
+			const actualPaths = getConfigFilesSync(getRelativePathForTests("index."));
+			expect(actualPaths.length).toBe(4);
+			comparePathArrays(["index.production.local.", "index.local.", "index.production.", "index."], actualPaths);
+		});
 		it("should pass for all existing with ext in tests root in test", () => {
 			configureEnvironmentMock("test");
 			configureExistingPaths(allPossibleExisting);
@@ -376,12 +428,26 @@ describe("resolve-node-configs-hierarchy integration tests", () => {
 			expect(actualPaths.length).toBe(2);
 			comparePathArrays([".env.test.json", ".env.json"], actualPaths);
 		});
+		it("should pass for all existing with dot as ext in tests root in test", () => {
+			configureEnvironmentMock("test");
+			configureExistingPaths(allPossibleExisting);
+			const actualPaths = getConfigFilesSync(getRelativePathForTests("index."));
+			expect(actualPaths.length).toBe(2);
+			comparePathArrays(["index.test.", "index."], actualPaths);
+		});
 		it("should pass for all existing with ext in tests root in test with flag", () => {
 			configureEnvironmentMock("test");
 			configureExistingPaths(allPossibleExisting);
 			const actualPaths = getConfigFilesSync(getRelativePathForTests(".env.json"), true);
 			expect(actualPaths.length).toBe(4);
 			comparePathArrays([".env.test.local.json", ".env.local.json", ".env.test.json", ".env.json"], actualPaths);
+		});
+		it("should pass for all existing with dot as ext in tests root in test with flag", () => {
+			configureEnvironmentMock("test");
+			configureExistingPaths(allPossibleExisting);
+			const actualPaths = getConfigFilesSync(getRelativePathForTests("index."), true);
+			expect(actualPaths.length).toBe(4);
+			comparePathArrays(["index.test.local.", "index.local.", "index.test.", "index."], actualPaths);
 		});
 	});
 	describe("resolve-node-configs-hierarchy getConfigFileSync integration tests", () => {
@@ -456,17 +522,35 @@ describe("resolve-node-configs-hierarchy integration tests", () => {
 			const actualPath = getConfigFileSync(getRelativePathForTests(".env.json"));
 			expect(actualPath).toBe(getAbsoluteFromRelative(".env.production.local.json"));
 		});
+		it("should pass for all existing with dot as ext in tests root in production", () => {
+			configureEnvironmentMock("production");
+			configureExistingPaths(allPossibleExisting);
+			const actualPath = getConfigFileSync(getRelativePathForTests("index."));
+			expect(actualPath).toBe(getAbsoluteFromRelative("index.production.local."));
+		});
 		it("should pass for all existing with ext in tests root in test", () => {
 			configureEnvironmentMock("test");
 			configureExistingPaths(allPossibleExisting);
 			const actualPath = getConfigFileSync(getRelativePathForTests(".env.json"));
 			expect(actualPath).toBe(getAbsoluteFromRelative(".env.test.json"));
 		});
+		it("should pass for all existing with dot as ext in tests root in test", () => {
+			configureEnvironmentMock("test");
+			configureExistingPaths(allPossibleExisting);
+			const actualPath = getConfigFileSync(getRelativePathForTests("index."));
+			expect(actualPath).toBe(getAbsoluteFromRelative("index.test."));
+		});
 		it("should pass for all existing with ext in tests root in test with flag", () => {
 			configureEnvironmentMock("test");
 			configureExistingPaths(allPossibleExisting);
 			const actualPath = getConfigFileSync(getRelativePathForTests(".env.json"), true);
 			expect(actualPath).toBe(getAbsoluteFromRelative(".env.test.local.json"));
+		});
+		it("should pass for all existing with dot as ext in tests root in test with flag", () => {
+			configureEnvironmentMock("test");
+			configureExistingPaths(allPossibleExisting);
+			const actualPath = getConfigFileSync(getRelativePathForTests("index."), true);
+			expect(actualPath).toBe(getAbsoluteFromRelative("index.test.local."));
 		});
 	});
 });
