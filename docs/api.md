@@ -52,7 +52,7 @@ declare function getConfigFilesSync(file: string, includeTestLocals?: boolean): 
 Parameters:
 
 - `file`: `string` — is base file path (related to [`process.cwd()`](https://nodejs.org/api/process.html#process_process_cwd)).
-- `includeTestLocals`: `boolean` (optional, default is `false`) — if `true` it will include `local` files for `test` environment (ignores them by default). So, if you pass `true` it will work absolutely the same way for ant environment. See explanation about `test` environment in [introduction section](introduction.md#resolving-configurations).
+- `includeTestLocals`: `boolean` (optional, default is `false`) — if `true` it will include `local` files for `test` environment (ignores them by default). So, if you pass `true` it will work absolutely the same way for any environment. See explanation about `test` environment in [introduction section](introduction.md#resolving-configurations).
 
 Returns:
 
@@ -113,7 +113,7 @@ declare function getConfigFileSync(file: string, includeTestLocals?: boolean): s
 Parameters:
 
 - `file`: `string` — is base file path (related to [`process.cwd()`](https://nodejs.org/api/process.html#process_process_cwd)).
-- `includeTestLocals`: `boolean` (optional, default is `false`) — if `true` it will include `local` files for `test` environment (ignores them by default). So, if you pass `true` it will work absolutely the same way for ant environment. See explanation about `test` environment in [introduction section](introduction.md#resolving-configurations).
+- `includeTestLocals`: `boolean` (optional, default is `false`) — if `true` it will include `local` files for `test` environment (ignores them by default). So, if you pass `true` it will work absolutely the same way for any environment. See explanation about `test` environment in [introduction section](introduction.md#resolving-configurations).
 
 Returns either:
 
@@ -178,7 +178,7 @@ declare function getConfigFiles(file: string, includeTestLocals?: boolean): Prom
 Parameters:
 
 - `file`: `string` — is base file path (related to [`process.cwd()`](https://nodejs.org/api/process.html#process_process_cwd)).
-- `includeTestLocals`: `boolean` (optional, default is `false`) — if `true` it will include `local` files for `test` environment (ignores them by default). So, if you pass `true` it will work absolutely the same way for ant environment. See explanation about `test` environment in [introduction section](introduction.md#resolving-configurations).
+- `includeTestLocals`: `boolean` (optional, default is `false`) — if `true` it will include `local` files for `test` environment (ignores them by default). So, if you pass `true` it will work absolutely the same way for any environment. See explanation about `test` environment in [introduction section](introduction.md#resolving-configurations).
 
 Returns:
 
@@ -239,7 +239,7 @@ declare function getConfigFile(file: string, includeTestLocals?: boolean): Promi
 Parameters:
 
 - `file`: `string` — is base file path (related to [`process.cwd()`](https://nodejs.org/api/process.html#process_process_cwd)).
-- `includeTestLocals`: `boolean` (optional, default is `false`) — if `true` it will include `local` files for `test` environment (ignores them by default). So, if you pass `true` it will work absolutely the same way for ant environment. See explanation about `test` environment in [introduction section](introduction.md#resolving-configurations).
+- `includeTestLocals`: `boolean` (optional, default is `false`) — if `true` it will include `local` files for `test` environment (ignores them by default). So, if you pass `true` it will work absolutely the same way for any environment. See explanation about `test` environment in [introduction section](introduction.md#resolving-configurations).
 
 Returns:
 
