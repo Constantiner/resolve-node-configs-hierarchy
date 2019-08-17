@@ -84,7 +84,7 @@
 <p>Parameters:</p>
 <ul>
 <li><code>file</code>: <code>string</code> — is base file path (related to <a href="https://nodejs.org/api/process.html#process_process_cwd"><code>process.cwd()</code></a>).</li>
-<li><code>includeTestLocals</code>: <code>boolean</code> (optional, default is <code>false</code>) — if <code>true</code> it will include <code>local</code> files for <code>test</code> environment (ignores them by default). So, if you pass <code>true</code> it will work absolutely the same way for ant environment. See explanation about <code>test</code> environment in <a href="/resolve-node-configs-hierarchy/docs/introduction#resolving-configurations">introduction section</a>.</li>
+<li><code>includeTestLocals</code>: <code>boolean</code> (optional, default is <code>false</code>) — if <code>true</code> it will include <code>local</code> files for <code>test</code> environment (ignores them by default). So, if you pass <code>true</code> it will work absolutely the same way for any environment. See explanation about <code>test</code> environment in <a href="/resolve-node-configs-hierarchy/docs/introduction#resolving-configurations">introduction section</a>.</li>
 </ul>
 <p>Returns:</p>
 <p><code>string[]</code> — an array of existing absolute file paths in order of precedence.</p>
@@ -121,7 +121,7 @@
 <p>Parameters:</p>
 <ul>
 <li><code>file</code>: <code>string</code> — is base file path (related to <a href="https://nodejs.org/api/process.html#process_process_cwd"><code>process.cwd()</code></a>).</li>
-<li><code>includeTestLocals</code>: <code>boolean</code> (optional, default is <code>false</code>) — if <code>true</code> it will include <code>local</code> files for <code>test</code> environment (ignores them by default). So, if you pass <code>true</code> it will work absolutely the same way for ant environment. See explanation about <code>test</code> environment in <a href="/resolve-node-configs-hierarchy/docs/introduction#resolving-configurations">introduction section</a>.</li>
+<li><code>includeTestLocals</code>: <code>boolean</code> (optional, default is <code>false</code>) — if <code>true</code> it will include <code>local</code> files for <code>test</code> environment (ignores them by default). So, if you pass <code>true</code> it will work absolutely the same way for any environment. See explanation about <code>test</code> environment in <a href="/resolve-node-configs-hierarchy/docs/introduction#resolving-configurations">introduction section</a>.</li>
 </ul>
 <p>Returns either:</p>
 <ul>
@@ -163,7 +163,7 @@
 <p>Parameters:</p>
 <ul>
 <li><code>file</code>: <code>string</code> — is base file path (related to <a href="https://nodejs.org/api/process.html#process_process_cwd"><code>process.cwd()</code></a>).</li>
-<li><code>includeTestLocals</code>: <code>boolean</code> (optional, default is <code>false</code>) — if <code>true</code> it will include <code>local</code> files for <code>test</code> environment (ignores them by default). So, if you pass <code>true</code> it will work absolutely the same way for ant environment. See explanation about <code>test</code> environment in <a href="/resolve-node-configs-hierarchy/docs/introduction#resolving-configurations">introduction section</a>.</li>
+<li><code>includeTestLocals</code>: <code>boolean</code> (optional, default is <code>false</code>) — if <code>true</code> it will include <code>local</code> files for <code>test</code> environment (ignores them by default). So, if you pass <code>true</code> it will work absolutely the same way for any environment. See explanation about <code>test</code> environment in <a href="/resolve-node-configs-hierarchy/docs/introduction#resolving-configurations">introduction section</a>.</li>
 </ul>
 <p>Returns:</p>
 <p><code>Promise&lt;string[]&gt;</code> — a promise resolving to an array of existing absolute file paths in order of precedence.</p>
@@ -200,7 +200,7 @@
 <p>Parameters:</p>
 <ul>
 <li><code>file</code>: <code>string</code> — is base file path (related to <a href="https://nodejs.org/api/process.html#process_process_cwd"><code>process.cwd()</code></a>).</li>
-<li><code>includeTestLocals</code>: <code>boolean</code> (optional, default is <code>false</code>) — if <code>true</code> it will include <code>local</code> files for <code>test</code> environment (ignores them by default). So, if you pass <code>true</code> it will work absolutely the same way for ant environment. See explanation about <code>test</code> environment in <a href="/resolve-node-configs-hierarchy/docs/introduction#resolving-configurations">introduction section</a>.</li>
+<li><code>includeTestLocals</code>: <code>boolean</code> (optional, default is <code>false</code>) — if <code>true</code> it will include <code>local</code> files for <code>test</code> environment (ignores them by default). So, if you pass <code>true</code> it will work absolutely the same way for any environment. See explanation about <code>test</code> environment in <a href="/resolve-node-configs-hierarchy/docs/introduction#resolving-configurations">introduction section</a>.</li>
 </ul>
 <p>Returns:</p>
 <p><code>Promise&lt;string | null&gt;</code> — a promise resolving to the most precedent existing file in files hierarchy. It is the first element of array, returned from <a href="#getconfigfiles"><code>getConfigFiles</code> method</a> (if the array is not empty). In case of empty array (files don't exist) the resulting promise will resolve to <code>null</code>.</p>
