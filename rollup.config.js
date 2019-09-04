@@ -5,7 +5,7 @@ import resolve from "rollup-plugin-node-resolve";
 import prettier from "rollup-plugin-prettier";
 import sourcemaps from "rollup-plugin-sourcemaps";
 
-const getBuildDate = () => format(new Date(), "DD MMMM YYYY");
+const getBuildDate = () => format(new Date(), "dd MMMM yyyy");
 const pkg = require("./package.json");
 
 const getActualBanner = () => {
