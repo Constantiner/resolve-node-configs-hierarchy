@@ -75,7 +75,7 @@ const siteConfig = {
 
 	// Open Graph and Twitter card images.
 	ogImage: "img/undraw_deployment_environments.png",
-	twitterImage: "img/undraw_tweetstorm.svg"
+	twitterImage: "img/undraw_tweetstorm.svg",
 
 	// Show documentation's last contributor's name.
 	// enableUpdateBy: true,
@@ -85,7 +85,7 @@ const siteConfig = {
 
 	// You may provide arbitrary config keys to be used as needed by your
 	// template. For example, if you need your repo's URL...
-	//   repoUrl: 'https://github.com/facebook/test-site',
+	repoUrl: "https://github.com/Constantiner/resolve-node-configs-hierarchy"
 };
 
 module.exports = siteConfig;
