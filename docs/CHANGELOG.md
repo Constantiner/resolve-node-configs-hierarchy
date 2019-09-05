@@ -4,6 +4,23 @@ title: Changelog
 sidebar_label: Changelog
 ---
 
+## [v0.4.3](https://github.com/Constantiner/resolve-node-configs-hierarchy/tree/v0.4.3) (2019-09-05)
+
+[Full Changelog](https://github.com/Constantiner/resolve-node-configs-hierarchy/compare/v0.4.2...v0.4.3)
+
+**Implemented enhancements:**
+
+- Fix security issues in NPM dependencies [\#58](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/58)
+
+**Fixed bugs:**
+
+- Fix Star On GitHub button in documentation [\#59](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/59)
+
+**Merged pull requests:**
+
+- Fix Star On GitHub button in documentation [\#61](https://github.com/Constantiner/resolve-node-configs-hierarchy/pull/61)
+- Fix security issues in NPM dependencies [\#60](https://github.com/Constantiner/resolve-node-configs-hierarchy/pull/60)
+
 ## [v0.4.2](https://github.com/Constantiner/resolve-node-configs-hierarchy/tree/v0.4.2) (2019-08-16)
 
 [Full Changelog](https://github.com/Constantiner/resolve-node-configs-hierarchy/compare/v0.4.1...v0.4.2)
