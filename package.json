@@ -1,6 +1,6 @@
 {
 	"name": "@constantiner/resolve-node-configs-hierarchy",
-	"version": "0.4.3",
+	"version": "0.4.4",
 	"description": "Simple library to resolve configuration files hierarchy in Node projects for producing effective configuration from them",
 	"main": "dist/index.js",
 	"module": "esm/index.js",
