@@ -4,6 +4,12 @@ title: Changelog
 sidebar_label: Changelog
 ---
 
+## [v0.4.5](https://github.com/Constantiner/resolve-node-configs-hierarchy/tree/v0.4.5) (2020-02-20)
+
+[Full Changelog](https://github.com/Constantiner/resolve-node-configs-hierarchy/compare/v0.4.4...v0.4.5)
+
+No any API changes again. Struggling with generating proper type definitions.
+
 ## [v0.4.4](https://github.com/Constantiner/resolve-node-configs-hierarchy/tree/v0.4.4) (2020-02-20)
 
 [Full Changelog](https://github.com/Constantiner/resolve-node-configs-hierarchy/compare/v0.4.3...v0.4.4)
