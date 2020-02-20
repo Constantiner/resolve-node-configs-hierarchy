@@ -1,3 +1,4 @@
+/** @module @constantiner/resolve-node-configs-hierarchy */
 import { acompose, afilter } from "@constantiner/fun-ctional";
 import { format, parse } from "path";
 import compose from "./util/compose";
@@ -91,9 +92,12 @@ const filterFiles = filterFunc => files => files.filter(filterFunc);
  * @see https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use
  */
 const getConfigFiles = (file, includeTestLocals = false) =>
-	acompose(afilter(fileExists), getHierarchicConfigsArray(getEnvironment, includeTestLocals), parse, resolvePath)(
-		file
-	);
+	acompose(
+		afilter(fileExists),
+		getHierarchicConfigsArray(getEnvironment, includeTestLocals),
+		parse,
+		resolvePath
+	)(file);
 
 /**
  * Returns a list of absolute file paths of existing files in the order to apply from first to last (in order of precedence).

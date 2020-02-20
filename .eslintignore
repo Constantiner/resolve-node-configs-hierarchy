@@ -2,3 +2,7 @@
 node_modules
 coverage
 website
+dist
+esm
+coverage
+types

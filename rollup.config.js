@@ -6,17 +6,17 @@ import prettier from "rollup-plugin-prettier";
 import sourcemaps from "rollup-plugin-sourcemaps";
 
 const getBuildDate = () => format(new Date(), "dd MMMM yyyy");
-const pkg = require("./package.json");
+const packageJson = require("./package.json");
 
 const getActualBanner = () => {
 	const licenseText = readFileSync("./LICENSE", "utf-8");
 	const banner = `/**
- * ${pkg.name}
- * ${pkg.description}
+ * ${packageJson.name}
+ * ${packageJson.description}
  * 
- * @author ${pkg.author.name} <${pkg.author.email}>
- * @version v${pkg.version}
- * @link ${pkg.homepage}
+ * @author ${packageJson.author.name} <${packageJson.author.email}>
+ * @version v${packageJson.version}
+ * @link ${packageJson.homepage}
  * @date ${getBuildDate()}
  * 
 ${licenseText.replace(/^/gm, " * ")}

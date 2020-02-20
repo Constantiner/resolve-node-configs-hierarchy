@@ -1,3 +1,4 @@
+/* eslint-disable jest/no-try-expect */
 import { getEnvironment } from "../../src/util/getEnvironment";
 
 describe("getEnvironment tests", () => {
