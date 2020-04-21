@@ -27,13 +27,7 @@ ${licenseText.replace(/^/gm, " * ")}
 };
 
 const getSourceFilesList = () => globby(["src/*.js"]);
-const getFileName = file =>
-	file
-		.split("/")
-		.pop()
-		.split(".")
-		.slice(0, -1)
-		.join(".");
+const getFileName = file => file.split("/").pop().split(".").slice(0, -1).join(".");
 const getOutput = (input, extension) => `${getFileName(input)}.${extension}`;
 const getFolderPart = folder => (folder ? folder + "/" : "");
 

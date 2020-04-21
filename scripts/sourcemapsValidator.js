@@ -18,10 +18,7 @@ const validateSourcemaps = (sourceFileName, sourceMapFileName) => {
 const checkSourceMaps = async () => {
 	const mapFiles = await getMapFilesList();
 	mapFiles.forEach(mapFile => {
-		const sourceFile = mapFile
-			.split(".")
-			.slice(0, -1)
-			.join(".");
+		const sourceFile = mapFile.split(".").slice(0, -1).join(".");
 		validateSourcemaps(sourceFile, mapFile);
 	});
 	console.log("All source maps are valid");
