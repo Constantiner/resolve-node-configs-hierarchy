@@ -4,6 +4,20 @@ title: Changelog
 sidebar_label: Changelog
 ---
 
+## [v0.4.6](https://github.com/Constantiner/resolve-node-configs-hierarchy/tree/v0.4.6) (2020-04-21)
+
+[Full Changelog](https://github.com/Constantiner/resolve-node-configs-hierarchy/compare/v0.4.5...v0.4.6)
+
+Fix development dependencies and corresponding potential vulnerabilities. No any API changes.
+
+**Implemented enhancements:**
+
+- Fix potential vulnerabilities [\#66](https://github.com/Constantiner/resolve-node-configs-hierarchy/issues/66)
+
+**Merged pull requests:**
+
+- Fix potential vulnerabilities [\#68](https://github.com/Constantiner/resolve-node-configs-hierarchy/pull/68)
+
 ## [v0.4.5](https://github.com/Constantiner/resolve-node-configs-hierarchy/tree/v0.4.5) (2020-02-20)
 
 [Full Changelog](https://github.com/Constantiner/resolve-node-configs-hierarchy/compare/v0.4.4...v0.4.5)
